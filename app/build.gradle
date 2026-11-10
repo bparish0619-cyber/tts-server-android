@@ -68,16 +68,31 @@ android {
 
     signingConfigs {
         release {
-            // read sign from local.properties
+            // Read the signing key from local.properties. CI creates that file from
+            // repository secrets; a fork WITHOUT those secrets gets empty values and
+            // a corrupt key.jks, which used to fail even debug builds when reading
+            // the keystore. So: only wire the key in when real values are present.
+            // Otherwise this config stays unset, debug builds fall back to the
+            // standard Android debug key, and release builds assemble unsigned.
+            // (CHANGE-ME: to sign release builds on a fork, add the ALIAS_NAME,
+            // ALIAS_PASSWORD, KEY_PASSWORD and KEY_STORE secrets, or fill in
+            // local.properties by hand. Upstream behavior with secrets is unchanged.)
             Properties pro = new Properties()
             InputStream input = project.rootProject.file("local.properties").newDataInputStream()
             pro.load(input)
-            storeFile file(pro.getProperty("KEY_PATH"))
-            storePassword pro.getProperty("KEY_PASSWORD")
-            keyAlias pro.getProperty("ALIAS_NAME")
-            keyPassword pro.getProperty("ALIAS_PASSWORD")
+            def keyFile = pro.getProperty("KEY_PATH") ? file(pro.getProperty("KEY_PATH")) : null
+            if (keyFile != null && keyFile.isFile() && keyFile.length() > 0
+                    && pro.getProperty("ALIAS_NAME") && pro.getProperty("KEY_PASSWORD")) {
+                storeFile keyFile
+                storePassword pro.getProperty("KEY_PASSWORD")
+                keyAlias pro.getProperty("ALIAS_NAME")
+                keyPassword pro.getProperty("ALIAS_PASSWORD")
+            }
         }
     }
+
+    // True only when the release key above was actually configured (see comment there).
+    def releaseSigningReady = signingConfigs.release.storeFile != null
 
     buildTypes {
         release {
@@ -87,7 +102,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.release
+            // Sign debug builds with the release key when it is configured;
+            // otherwise AGP's built-in debug key is used (see signingConfigs above).
+            if (releaseSigningReady) {
+                signingConfig signingConfigs.release
+            }
             applicationIdSuffix ".debug"
             versionNameSuffix "_debug"
         }
