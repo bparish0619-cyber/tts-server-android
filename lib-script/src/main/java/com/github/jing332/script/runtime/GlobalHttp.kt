@@ -67,7 +67,7 @@ class GlobalHttp : ScriptableObject() {
 
             form.forEach { entry ->
                 when (entry.value) {
-                    // 文件表单
+                    // File form
                     is Map<*, *> -> {
                         val filePartMap = entry.value as Map<CharSequence, Any>
                         val fileName = filePartMap["fileName"] as? CharSequence
@@ -89,7 +89,7 @@ class GlobalHttp : ScriptableObject() {
                         )
                     }
 
-                    // 常规表单
+                    // Regular form
                     else -> multipartBody.addFormDataPart(
                         entry.key.toString(),
                         entry.value as String

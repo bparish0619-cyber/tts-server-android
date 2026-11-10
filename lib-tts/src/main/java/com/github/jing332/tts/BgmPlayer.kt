@@ -123,7 +123,7 @@ class BgmPlayer(val context: SynthesizerContext) : IBgmPlayer {
 
     private fun addMediaItem(source: BgmSource, file: File): Boolean {
         val mime = file.mimeType
-        // 非audio或未知则跳过
+        // Skip if it is not audio or the type is unknown
         if (mime == null || !mime.startsWith("audio")) return false
 
         val item =

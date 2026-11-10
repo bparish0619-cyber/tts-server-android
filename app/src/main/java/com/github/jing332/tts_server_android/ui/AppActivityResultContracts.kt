@@ -12,7 +12,7 @@ import com.github.jing332.common.utils.setBinder
 
 object AppActivityResultContracts {
     /**
-     * 用于传递Parcelable数据
+     * Used to pass Parcelable data
      */
     @Suppress("DEPRECATION")
     fun <T : Parcelable> parcelableDataActivity(clz: Class<out Activity>) =

@@ -4,7 +4,7 @@ import cn.hutool.crypto.digest.DigestUtil
 import java.io.InputStream
 
 /**
- * 将字符串转化为MD5
+ * Convert a string to MD5
  */
 @Suppress("unused")
 object MD5Utils {

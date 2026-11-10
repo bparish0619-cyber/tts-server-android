@@ -1,23 +1,23 @@
-# 朗读规则
-> 朗读规则用于将原始文本分段并标记tag，然后由TTS Server根据tag匹配配置进行语音合成。
+# Speech Rules
+> Speech rules split the original text into segments and mark each segment with a tag; TTS Server then matches a configuration by tag to synthesize the speech.
 
-## 软件内置的规则示例：
+## Example of the rule built into the app:
 
 ```javascript 
 let SpeechRuleJS = {
-    name: "旁白/对话",
+    name: "Narration/Dialogue",
     id: "ttsrv.multi_voice",
     author: "TTS Server",
     version: 4,
     
-    // Map类型，key为标签id，value为标签下拉框中的显示名称
-    tags: {narration: "旁白", dialogue: "对话"},
+    // Map type: the key is the tag id, the value is the display name shown in the tag dropdown
+    tags: {narration: "Narration", dialogue: "Dialogue"},
 
-    // text 为原始的未经处理的文本
-    // 返回一个List：
+    // text is the original, unprocessed text
+    // Returns a List:
     // [
-    //     {text: "这是一段旁白文本", tag: "narration"}, 
-    //     {text: "这是一段对话文本", tag: "dialogue"}
+    //     {text: "This is a narration text", tag: "narration"}, 
+    //     {text: "This is a dialogue text", tag: "dialogue"}
     // ]
     handleText(text) {
         const list = [];
@@ -44,8 +44,8 @@ let SpeechRuleJS = {
         return list;
     },
 
-    // 调用完handleText后对其返回的list中每个元素text进行分句，
-    // 返回一个字符串List
+    // After handleText returns, split the text of each element in the returned list into sentences;
+    // Returns a List of strings
     splitText(text) {
         let separatorStr = "。？?！!;；"
 

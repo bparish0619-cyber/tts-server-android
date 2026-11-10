@@ -11,7 +11,7 @@ object ConfigImportHelper {
     )
 
     /**
-     * 检查配置字符串是否符合配置格式
+     * Check whether a configuration string matches the configuration format
      */
     fun getConfigType(str: String): ConfigType {
         fieldMap.forEach { entry ->

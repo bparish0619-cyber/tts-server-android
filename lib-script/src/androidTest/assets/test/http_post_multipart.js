@@ -1,7 +1,7 @@
-let txt = `Hello World! 这是一个文件名为hello.txt的内容`
+let txt = `Hello World! This is the content of a file named hello.txt`
 
 let partBody = {
-   'fileToUpload': { // 文件类型的内容
+   'fileToUpload': { // File-type content
        'body': txt,
        'fileName': "hello.txt",
        'contentType': "text/plain"

@@ -57,9 +57,9 @@ class DebugSystemTtsActivity : ComposeActivity() {
                         val syncLock = SyncLock()
                         val tts = TextToSpeech(this@DebugSystemTtsActivity, {
                             if (it == TextToSpeech.SUCCESS) {
-                                toast("初始化成功")
+                                toast("Initialized successfully")
                             } else
-                                toast("初始化失败")
+                                toast("Initialization failed")
 
                             syncLock.cancel()
                         }, context.packageName)

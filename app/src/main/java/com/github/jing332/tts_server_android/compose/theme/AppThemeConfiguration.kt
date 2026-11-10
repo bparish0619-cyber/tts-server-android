@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 /**
- * 默认主题
+ * Default theme
  */
 @Composable
 fun defaultTheme(
@@ -89,7 +89,7 @@ fun defaultTheme(
 
 
 /**
- * 动态颜色主题
+ * Dynamic color theme
  */
 @Composable
 fun dynamicColorTheme(
@@ -102,7 +102,7 @@ fun dynamicColorTheme(
         defaultTheme(darkTheme)
 
 /**
- * 绿色
+ * Green
  */
 @Composable
 fun greenTheme(
@@ -174,7 +174,7 @@ fun greenTheme(
         )
 
 /**
- * 红色
+ * Red
  */
 @Composable
 fun redTheme(
@@ -246,7 +246,7 @@ fun redTheme(
         )
 
 /**
- * 粉色
+ * Pink
  */
 @Composable
 fun pinkTheme(
@@ -318,7 +318,7 @@ fun pinkTheme(
         )
 
 /**
- * 蓝色
+ * Blue
  */
 @Composable
 fun blueTheme(
@@ -390,7 +390,7 @@ fun blueTheme(
         )
 
 /**
- * 青色
+ * Cyan
  */
 @Composable
 fun cyanTheme(
@@ -463,7 +463,7 @@ fun cyanTheme(
 
 
 /**
- * 橙色
+ * Orange
  */
 @Composable
 fun orangeTheme(
@@ -535,7 +535,7 @@ fun orangeTheme(
         )
 
 /**
- * 紫色
+ * Purple
  */
 @Composable
 fun purpleTheme(
@@ -607,7 +607,7 @@ fun purpleTheme(
         )
 
 /**
- * 棕色
+ * Brown
  */
 @Composable
 fun brownTheme(
@@ -679,7 +679,7 @@ fun brownTheme(
         )
 
 /**
- * 灰色
+ * Gray
  */
 @Composable
 fun grayTheme(
@@ -752,13 +752,13 @@ fun grayTheme(
 
 
 /**
- * 主题颜色状态管理
+ * Theme color state management
  */
 @Composable
 fun themeAnimation(targetTheme: ColorScheme): ColorScheme {
-    //动画时长
+    // Animation duration
     val durationMillis = 600
-    //插值器
+    // Interpolator (easing)
     val animationSpec = TweenSpec<Color>(durationMillis = durationMillis, easing = FastOutLinearInEasing)
 
     val primary by animateColorAsState(

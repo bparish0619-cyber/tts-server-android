@@ -22,12 +22,12 @@ class QSTileService : TileService() {
 
     override fun onClick() {
         super.onClick()
-        if (qsTile.state == Tile.STATE_ACTIVE) { /* 关闭 */
+        if (qsTile.state == Tile.STATE_ACTIVE) { /* Turn off */
             if (SysTtsForwarderService.isRunning) {
                 ForwarderServiceManager.closeSysTtsForwarder()
             }
             qsTile.state = Tile.STATE_INACTIVE
-        } else {/* 打开 */
+        } else {/* Turn on */
             startSysTtsForwarder()
             qsTile.state = Tile.STATE_ACTIVE
         }

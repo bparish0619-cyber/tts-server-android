@@ -88,7 +88,7 @@ interface ReplaceRuleDao {
     fun update(vararg data: ReplaceRule)
 
     /**
-     * 更新数据并刷新排序索引
+     * Update the data and refresh the ordering index
      */
     fun updateDataAndRefreshOrder(data: ReplaceRule) {
         val list = getListInGroup(data.groupId).toMutableList()

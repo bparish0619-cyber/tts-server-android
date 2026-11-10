@@ -44,7 +44,7 @@ object MyTools {
         }
     }
 
-    /* 添加快捷方式 */
+    /* Add a shortcut */
     @SuppressLint("UnspecifiedImmutableFlag")
     @Suppress("DEPRECATION")
     fun addShortcut(
@@ -57,8 +57,8 @@ object MyTools {
         ctx.longToast(R.string.add_shortcut_if_fail_tips)
         if (Build.VERSION.SDK_INT < 26) { /* Android8.0 */
             val addShortcutIntent = Intent("com.android.launcher.action.INSTALL_SHORTCUT")
-            // 不允许重复创建
-            addShortcutIntent.putExtra("duplicate", false) // 经测试不是根据快捷方式的名字判断重复的
+            // Do not allow creating duplicates
+            addShortcutIntent.putExtra("duplicate", false) // Testing showed duplicates are not detected by the shortcut name
             addShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name)
             addShortcutIntent.putExtra(
                 Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
@@ -72,7 +72,7 @@ object MyTools {
             addShortcutIntent
                 .putExtra(Intent.EXTRA_SHORTCUT_INTENT, launcherIntent)
 
-            // 发送广播
+            // Send the broadcast
             ctx.sendBroadcast(addShortcutIntent)
         } else {
             val shortcutManager: ShortcutManager = ctx.getSystemService(ShortcutManager::class.java)

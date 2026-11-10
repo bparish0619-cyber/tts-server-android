@@ -32,13 +32,13 @@ data class SpeechRule(
     @ColumnInfo(defaultValue = "")
     var tags: Map<String, String> = mutableMapOf(),
 
-    // 声明的tag的附加
-    // 如：为tag为dialogue的声明role附加数据
-    // {dialogue: {role: {label: '角色名', "hint": "仅支持前置搜索"}, } }
+    // Attachments for declared tags
+    // For example: attach data for a role declared for the dialogue tag
+    // {dialogue: {role: {label: 'Character name', "hint": "Only prefix search is supported"}, } }
     @ColumnInfo(defaultValue = "")
     var tagsData: TagsDataMap = mutableMapOf(),
 
-    // 索引 排序用
+    // Index, used for sorting
     @ColumnInfo(name = "order", defaultValue = "0")
     var order: Int = 0,
 ) : Parcelable {
@@ -56,5 +56,5 @@ data class SpeechRule(
     }
 }
 
-// {dialogue: {role: {label: '角色名', "hint": "仅支持前置搜索"}, } }
+// {dialogue: {role: {label: 'Character name', "hint": "Only prefix search is supported"}, } }
 typealias TagsDataMap =  Map<out String, Map<out String, Map<out String, String>>>

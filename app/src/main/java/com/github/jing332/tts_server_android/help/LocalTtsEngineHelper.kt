@@ -16,7 +16,7 @@ class LocalTtsEngineHelper(val context: Context) {
     private var engineName: String = ""
 
     /**
-     * return 是否 初始化成功
+     * return whether initialization succeeded
      */
     suspend fun setEngine(name: String): Boolean {
         if (engineName != name) {

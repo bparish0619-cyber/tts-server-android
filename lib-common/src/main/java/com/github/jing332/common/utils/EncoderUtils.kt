@@ -3,7 +3,7 @@ package com.github.jing332.common.utils
 import android.util.Base64
 
 /**
- * 编码工具 escape base64
+ * Encoding utilities: escape and Base64
  */
 @Suppress("unused")
 object EncoderUtils {

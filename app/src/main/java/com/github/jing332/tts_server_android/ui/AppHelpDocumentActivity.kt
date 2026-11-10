@@ -72,8 +72,8 @@ class AppHelpDocumentActivity : ComposeActivity() {
                         override fun resolve(view: View, link: String) {
                             Log.d(TAG, "resolve: $link")
                             AlertDialog.Builder(this@AppHelpDocumentActivity)
-                                .setTitle("是否跳转？")
-                                .setMessage("是否跳转到 $link ?")
+                                .setTitle("Open this link?")
+                                .setMessage("Go to $link ?")
                                 .setPositiveButton(android.R.string.ok) { _, _ ->
                                     super.resolve(view, link)
                                 }

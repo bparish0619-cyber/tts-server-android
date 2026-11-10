@@ -9,9 +9,9 @@ internal object TypeConverterUtils {
     @OptIn(ExperimentalSerializationApi::class)
     val json by lazy {
         Json {
-            ignoreUnknownKeys = true //忽略未知
-            explicitNulls = false //忽略为null的字段
-            isLenient = true //忽略不符合json规范的字段
+            ignoreUnknownKeys = true // Ignore unknown keys
+            explicitNulls = false // Ignore fields that are null
+            isLenient = true // Ignore fields that do not conform to the JSON specification
             allowStructuredMapKeys = true
         }
     }

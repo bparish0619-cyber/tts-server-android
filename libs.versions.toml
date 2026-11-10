@@ -1,16 +1,30 @@
 [versions]
-compileSdk = "35"
+# ============================================================
+# ANDROID SDK LEVELS (CHANGE-ME: bump these for each new Android release)
+# - compileSdk / targetSdk must move together. Google Play requires
+#   targetSdk 36 (Android 16) for new apps and updates since Aug 31, 2026.
+# - Every bump also needs: an AGP version that supports the new API level
+#   (see "agp" below), a Gradle wrapper at or above AGP's minimum
+#   (gradle/wrapper/gradle-wrapper.properties), and a manifest pass for
+#   new behavior changes (foreground service types, permissions).
+# ============================================================
+compileSdk = "36"
 minSdk = "21"
-targetSdk = "35"
+targetSdk = "36"
 
 coreKtx = "1.15.0"
 appcompat = "1.7.0"
 activityKtx = "1.10.1"
 room = '2.6.1'
-agp = "8.8.1"
-androidTools = "31.8.2"
-kotlin = "2.1.10"
-ksp = "2.1.10-1.0.29"
+# AGP (Android Gradle Plugin). CHANGE-ME: must support the compileSdk above.
+# AGP 8.13.x is the line that supports API 36; it requires Gradle 8.13+.
+agp = "8.13.2"
+# Internal Android build tools library, version-locked to AGP (8.13.x -> 31.13.x).
+androidTools = "31.13.2"
+# Kotlin. CHANGE-ME: ksp below must use the SAME Kotlin version as its prefix.
+kotlin = "2.2.21"
+# KSP (symbol processing). Format is "<kotlin version>-<ksp release>", keep in sync with kotlin above.
+ksp = "2.2.21-2.0.5"
 about = "10.9.2"
 
 coroutines = "1.10.1"

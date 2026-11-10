@@ -109,7 +109,7 @@ internal fun ListManagerScreen(
         navController.navigate(NavRoutes.TtsEdit.id)
     }
 
-    // 长按Item拖拽提示
+    // Tip for long-pressing an item to drag it
     var hasShownTip by rememberSaveable { mutableStateOf(false) }
 
     var showTagClearDialog by remember { mutableStateOf<SystemTtsV2?>(null) }

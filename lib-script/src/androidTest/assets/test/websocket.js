@@ -29,5 +29,5 @@ ws.on('open', function(){
 
 latch.await()
 
-// 强制断开
+// Force disconnect
 // ws.cancel()

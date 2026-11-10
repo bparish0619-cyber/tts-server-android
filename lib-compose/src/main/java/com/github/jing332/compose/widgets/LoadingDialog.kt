@@ -87,7 +87,7 @@ fun LoadingDialog(onDismissRequest: () -> Unit, dismissOnBackPress: Boolean = fa
                         .height(16.dp)
                 )
                 Text(
-                    text = "加载中",
+                    text = "Loading",
                 )
             }
         }

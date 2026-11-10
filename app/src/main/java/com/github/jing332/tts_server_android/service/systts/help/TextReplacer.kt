@@ -25,7 +25,7 @@ class TextReplacer {
     }
 
     /**
-     * 执行替换
+     * Perform the replacement
      */
     fun replace(
         text: String,

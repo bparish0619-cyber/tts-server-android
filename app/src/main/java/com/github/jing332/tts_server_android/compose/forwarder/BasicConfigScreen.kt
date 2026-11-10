@@ -47,12 +47,12 @@ internal fun BasicConfigScreen(
 
             actionOnClosed -> {
                 onRunningChange(false)
-                vm.logs.add(LogEntry(level = LogLevel.INFO, message = "服务已关闭"))
+                vm.logs.add(LogEntry(level = LogLevel.INFO, message = "Service stopped"))
             }
 
             actionOnStarted -> {
                 onRunningChange(true)
-                vm.logs.add(LogEntry(level = LogLevel.INFO, message = "服务已启动"))
+                vm.logs.add(LogEntry(level = LogLevel.INFO, message = "Service started"))
             }
         }
     }

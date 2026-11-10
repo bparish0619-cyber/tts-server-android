@@ -19,7 +19,7 @@ data class SystemTts(
     @PrimaryKey(autoGenerate = true)
     val id: Long = System.currentTimeMillis(),
 
-    // 所属组的ID
+    // ID of the group it belongs to
     @ColumnInfo(defaultValue = AbstractListGroup.DEFAULT_GROUP_ID.toString())
     var groupId: Long = AbstractListGroup.DEFAULT_GROUP_ID,
 
@@ -32,11 +32,11 @@ data class SystemTts(
 
     var tts: ITextToSpeechEngine,
 
-    // 索引 排序用
+    // Index, used for sorting
     @ColumnInfo(defaultValue = "0")
     var order: Int = 0,
 ) : Parcelable {
-    // 朗读目标
+    // Speech target
     @Deprecated("")
      @SerialName("readAloudTarget")
     @get:Ignore
@@ -56,14 +56,14 @@ data class SystemTts(
             speechRule.isStandby = value
         }
 
-    // 转换器
+    // Converter
     class Converters {
         companion object {
             @OptIn(ExperimentalSerializationApi::class)
             val json by lazy {
                 Json {
-                    ignoreUnknownKeys = true //忽略未知
-                    explicitNulls = false //忽略为null的字段
+                    ignoreUnknownKeys = true // Ignore unknown keys
+                    explicitNulls = false // Ignore fields that are null
                     allowStructuredMapKeys = true
                 }
             }

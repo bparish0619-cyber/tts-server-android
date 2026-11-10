@@ -77,7 +77,7 @@ class App : Application() {
         val intent = packageManager.getLaunchIntentForPackage(packageName)!!
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        //杀掉以前进程
+        // Kill the previous process
         Process.killProcess(Process.myPid());
     }
 }

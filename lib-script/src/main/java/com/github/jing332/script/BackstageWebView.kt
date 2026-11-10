@@ -24,7 +24,7 @@ import kotlin.coroutines.resume
 import kotlin.jvm.Throws
 
 /**
- * 后台webView
+ * Background WebView
  */
 class BackstageWebView(
     private val payload: Payload,

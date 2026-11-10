@@ -134,13 +134,13 @@ abstract class AbsForwarderService(
     }
 
     private fun initNotification(localAddress: String) {
-        /*Android 12(S)+ 必须指定PendingIntent.FLAG_*/
+        /* Android 12 (S)+ requires specifying a PendingIntent flag */
         val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
             PendingIntent.FLAG_IMMUTABLE
         else
             0
 
-        /*点击通知跳转*/
+        /* Tap the notification to navigate */
         val pendingIntent =
             PendingIntent.getActivity(
                 this, 0, Intent(
@@ -154,7 +154,7 @@ abstract class AbsForwarderService(
                 },
                 pendingIntentFlags
             )
-        /*当点击退出按钮时发送广播*/
+        /* Broadcast sent when the exit button is tapped */
         val closePendingIntent: PendingIntent =
             PendingIntent.getBroadcast(
                 this,
@@ -172,7 +172,7 @@ abstract class AbsForwarderService(
 
         val smallIconRes: Int
         val builder = Notification.Builder(applicationContext)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {/*Android 8.0+ 要求必须设置通知信道*/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {/* Android 8.0+ requires setting a notification channel */
             val chan = NotificationChannel(
                 notificationChanId,
                 getString(notificationChanTitle),
@@ -197,7 +197,7 @@ abstract class AbsForwarderService(
             .addAction(0, getString(R.string.copy_address), copyAddressPendingIntent)
             .build()
 
-        // 前台服务
+        // Foreground service
         startForegroundCompat(id, notification)
     }
 

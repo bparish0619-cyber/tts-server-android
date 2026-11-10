@@ -10,7 +10,7 @@ abstract class AbstractCachedManager<K, V>(timeout: Long, delay: Long) {
         cache.schedulePrune(delay)
         cache.setListener { k, v ->
             if (onCacheRemove(k, v))
-                cache.put(k, v) // 隐患 迭代时修改
+                cache.put(k, v) // Pitfall: modifying while iterating
         }
     }
 

@@ -56,12 +56,12 @@ object AppLocale {
     }
 
     /**
-     * 当前系统语言
+     * Current system language
      */
     @SuppressLint("ObsoleteSdkInt")
     private fun getSystemLocale(): Locale {
         val locale: Locale
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //7.0有多语言设置获取顶部的语言
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { // Android 7.0+ has multi-locale settings; get the top language
             locale = sysConfiguration.locales.get(0)
         } else {
             @Suppress("DEPRECATION")
@@ -71,7 +71,7 @@ object AppLocale {
     }
 
     /**
-     * 当前App语言
+     * Current app language
      */
     @SuppressLint("ObsoleteSdkInt")
     fun current(context: Context): Locale {
@@ -87,14 +87,14 @@ object AppLocale {
 
 
     /**
-     * 当前设置语言
+     * Currently configured language
      */
     fun getLocaleFromFile(context: Context): Locale {
         return localeMap[getLocaleCodeFromFile(context)] ?: getSystemLocale()
     }
 
     /**
-     * 判断App语言和设置语言是否相同
+     * Whether the app language is the same as the configured language
      */
     fun isSameWithSetting(context: Context): Boolean {
         val locale = current(context)

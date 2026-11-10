@@ -6,7 +6,7 @@ import com.github.jing332.database.entities.systts.source.PluginTtsSource
 import com.github.jing332.script.simple.ext.JsExtensions
 
 /**
- * @param tts 在JS中用 `ttsrv.tts` 访问
+ * @param tts Accessed in JS via `ttsrv.tts`
  */
 @Keep
 data class TtsEngineContext(

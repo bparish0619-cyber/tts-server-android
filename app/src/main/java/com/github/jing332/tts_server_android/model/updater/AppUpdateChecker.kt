@@ -36,9 +36,9 @@ object AppUpdateChecker {
     private fun getApkDownloadUrl(assets: List<Github.Release.Asset>): Github.Release.Asset {
         val abi = Build.SUPPORTED_ABIS[0]
 
-        // 最大的为全量apk
+        // The largest one is the full APK
         val apkUniversal = assets.sortedByDescending { it.size }[0]
-        // 根据CPU ABI判断精简版apk
+        // Pick the slim APK based on the CPU ABI
         val liteApk =
             assets.find { it.name.endsWith("${abi}.apk") }
 
@@ -49,7 +49,7 @@ object AppUpdateChecker {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
         val dateTime = LocalDateTime.parse(str, formatter)
 
-        // 将LocalDateTime转换为时间戳（秒）
+        // Convert a LocalDateTime to a timestamp (in seconds)
         val instant = dateTime.toInstant(ZoneOffset.UTC)
         return instant.epochSecond
     }

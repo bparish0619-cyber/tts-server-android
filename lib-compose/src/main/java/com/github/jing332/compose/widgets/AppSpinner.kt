@@ -203,7 +203,7 @@ private fun ExposedDropTextFieldPreview() {
     var key by remember { mutableIntStateOf(1) }
     val list = 0.rangeTo(10).toList()
     AppSpinner(
-        labelText = "所属分组",
+        labelText = "Group",
         value = key,
         values = list,
         entries = list.map { it.toString() },
@@ -212,7 +212,7 @@ private fun ExposedDropTextFieldPreview() {
             IconButton(
                 onClick = {}
             ) {
-                Icon(Icons.Default.Add, "添加", tint = Color.Blue)
+                Icon(Icons.Default.Add, "Add", tint = Color.Blue)
             }
         }
     ) { k, _ ->

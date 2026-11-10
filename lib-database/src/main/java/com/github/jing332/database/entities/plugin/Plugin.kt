@@ -33,7 +33,7 @@ data class Plugin(
 
     var code: String = "",
 
-    // authKey: { label: "验证KEY", hint: "填入用于验证身份的KEY"}
+    // authKey: { label: "Verification KEY", hint: "Enter the KEY used to verify your identity"}
     @ColumnInfo(name = "defVars", defaultValue = "{}")
     var defVars: Map<String, Map<String, String>> = mutableMapOf(),
 
@@ -41,7 +41,7 @@ data class Plugin(
     @ColumnInfo(defaultValue = "{}")
     var userVars: Map<String, String> = mutableMapOf(),
 
-    // 索引 排序用
+    // Index, used for sorting
     @ColumnInfo(name = "order", defaultValue = "0")
     var order: Int = 0,
 ) : Parcelable {

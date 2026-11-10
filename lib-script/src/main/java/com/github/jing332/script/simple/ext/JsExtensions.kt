@@ -25,7 +25,7 @@ open class JsExtensions(open val context: Context, open val engineId: String = "
         return getAudioSampleRate(ins.readBytes())
     }
 
-    /* Str转ByteArray */
+    /* Convert String to ByteArray */
     @ScriptInterface
     fun strToBytes(str: String): ByteArray {
         return str.toByteArray(charset("UTF-8"))
@@ -37,7 +37,7 @@ open class JsExtensions(open val context: Context, open val engineId: String = "
     }
 
     @ScriptInterface
-            /* ByteArray转Str */
+            /* Convert ByteArray to String */
     fun bytesToStr(bytes: ByteArray): String {
         return String(bytes, charset("UTF-8"))
     }
@@ -47,10 +47,10 @@ open class JsExtensions(open val context: Context, open val engineId: String = "
         return String(bytes, charset(charset))
     }
 
-    //****************文件操作******************//
+    //**************** File operations ******************//
     /**
-     * 获取本地文件
-     * @param path 相对路径
+     * Get a local file
+     * @param path Relative path
      * @return File
      */
     @ScriptInterface
@@ -66,7 +66,7 @@ open class JsExtensions(open val context: Context, open val engineId: String = "
     }
 
     /**
-     * 读Bytes文件
+     * Read a file as bytes
      */
     @ScriptInterface
     fun readFile(path: String): ByteArray? {
@@ -78,7 +78,7 @@ open class JsExtensions(open val context: Context, open val engineId: String = "
     }
 
     /**
-     * 读取文本文件
+     * Read a text file
      */
     @ScriptInterface
     fun readTxtFile(path: String): String {
@@ -90,7 +90,7 @@ open class JsExtensions(open val context: Context, open val engineId: String = "
     }
 
     /**
-     * 获取文件编码
+     * Get the file encoding
      */
     @ScriptInterface
     fun charsetDetect(f: File): String = FileUtils.getFileCharsetSimple(f)
@@ -116,8 +116,8 @@ open class JsExtensions(open val context: Context, open val engineId: String = "
     }
 
     /**
-     * 删除本地文件
-     * @return 操作是否成功
+     * Delete a local file
+     * @return Whether the operation succeeded
      */
     @ScriptInterface
     fun deleteFile(path: String): Boolean {

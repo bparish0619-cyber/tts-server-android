@@ -114,7 +114,7 @@ internal fun PluginEditorScreen(
                 it.data?.getParcelableExtra<PluginTtsSource>(PluginPreviewActivity.KEY_SOURCE)
             Log.d("PluginEditor", "source update: $source")
             if (source == null) {
-                context.longToast("空返回值")
+                context.longToast("Empty return value")
             } else
                 vm.updateSource(source)
         }
@@ -156,7 +156,7 @@ internal fun PluginEditorScreen(
                 }
             }
         },
-        onLongClickSave = { // 仅保存
+        onLongClickSave = { // Save only
             onSave(vm.plugin.copy(code = codeEditor!!.string()))
             navController.popBackStack()
         },

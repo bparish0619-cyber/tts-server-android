@@ -18,7 +18,7 @@ class AnalyzeUrl(
     }
 
     fun eval(): UrlOption? {
-        // 提取js替换变量
+        // Extract the JS replacement variables
         val matcher = jsPattern.matcher(mUrl)
         val sb = StringBuffer()
         while (matcher.find()) {
@@ -29,7 +29,7 @@ class AnalyzeUrl(
 //                val result = evalJs(jsCodeStr)
                 matcher.appendReplacement(sb," result.toString()")
             }.onFailure {
-                throw Exception("执行 $jsCodeStr 时出错", it)
+                throw Exception("Error while executing $jsCodeStr", it)
             }
 
             matcher.end()
@@ -50,7 +50,7 @@ class AnalyzeUrl(
     }
 
 
-    // 执行js 替换变量
+    // Execute JS to replace variables
 //    private fun evalJs(jsStr: String): Any? {
 //        val bindings = SimpleBindings()
 //        bindings["speakText"] = speakText
@@ -59,7 +59,7 @@ class AnalyzeUrl(
 //        return SCRIPT_ENGINE.eval(jsStr, bindings)
 //    }
 
-    // url中的参数
+    // Parameters in the URL
     @kotlinx.serialization.Serializable
     data class UrlOption(
         var method: String? = null,

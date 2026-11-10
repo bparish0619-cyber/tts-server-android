@@ -495,19 +495,19 @@ public class Sonic {
             numSamples = maxSamples;
         }
 
-        // 获取当前 position，以便后续计算写入的字节数
+        // Get the current position, so the number of bytes written can be calculated later
         int initialPosition = outBuffer.position();
 
         for (int i = 0; i < numSamples * numChannels; i++) {
-            short sample = outputBuffer[i]; // 假设 outputBufferArray 是内部的 short[] 数组
-            outBuffer.put((byte) (sample & 0xff)); // 低字节
-            outBuffer.put((byte) (sample >> 8));   // 高字节
+            short sample = outputBuffer[i]; // Assume outputBufferArray is the internal short[] array
+            outBuffer.put((byte) (sample & 0xff)); // Low byte
+            outBuffer.put((byte) (sample >> 8));   // High byte
         }
 
         move(outputBuffer, 0, outputBuffer, numSamples, remainingSamples);
         numOutputSamples = remainingSamples;
 
-        // 计算并返回实际写入的字节数
+        // Calculate and return the actual number of bytes written
         return outBuffer.position() - initialPosition;
     }
 

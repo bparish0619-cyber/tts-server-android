@@ -20,14 +20,14 @@ data class SpeechRuleInfo(
     var tag: String = "",
     var tagRuleId: String = "",
 
-    // 显示在列表右上角的标签名
+    // Tag name shown in the top-right corner of the list
     var tagName: String = "",
 
-    // 用于存储tag的数据
-    // 例: key=role, value=张三
+    // Data used to store the tag
+    // Example: key=role, value=Zhang San
     var tagData: Map<String, String> = mutableMapOf(),
 
-    // 用于标识tts配置的唯一性，由脚本处理后将 tag 与 id 返回给程序以找到朗读
+    // Used to identify the uniqueness of a TTS configuration; after script processing, the tag and id are returned to the program to locate the speech entry
     var configId: Long = 0L
 ) : Parcelable {
     val mutableTagData: MutableMap<String, String>
@@ -35,8 +35,8 @@ data class SpeechRuleInfo(
 
 
     /**
-     * 判断tag是否相同
-     * @return 相同
+     * Determine whether the tags are the same
+     * @return true if they are the same
      */
     fun isTagSame(rule: SpeechRuleInfo): Boolean {
         return tag == rule.tag && tagRuleId == rule.tagRuleId

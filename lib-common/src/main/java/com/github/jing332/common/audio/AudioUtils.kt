@@ -40,14 +40,14 @@ object AudioUtils {
     ): ByteArray {
         val headerStream = ByteArrayOutputStream()
 
-        // RIFF 头
+        // RIFF header
         headerStream.write("RIFF".toByteArray())
-        headerStream.writeIntLE(0) // ChunkSize 占位符
+        headerStream.writeIntLE(0) // ChunkSize placeholder
         headerStream.write("WAVE".toByteArray())
 
-        // fmt 子块
+        // fmt subchunk
         headerStream.write("fmt ".toByteArray())
-        headerStream.writeIntLE(16) // Subchunk1Size (PCM 为 16)
+        headerStream.writeIntLE(16) // Subchunk1Size (16 for PCM)
         headerStream.writeShortLE(1) // AudioFormat (PCM)
         headerStream.writeShortLE(numChannels)
         headerStream.writeIntLE(sampleRate)
@@ -57,9 +57,9 @@ object AudioUtils {
         headerStream.writeShortLE(blockAlign.toShort())
         headerStream.writeShortLE(bitsPerSample)
 
-        // data 子块头
+        // data subchunk header
         headerStream.write("data".toByteArray())
-        headerStream.writeIntLE(0) // Subchunk2Size 占位符
+        headerStream.writeIntLE(0) // Subchunk2Size placeholder
 
         return headerStream.toByteArray()
     }
@@ -67,13 +67,13 @@ object AudioUtils {
     fun updateWavHeader(header: ByteArray, dataSize: Int): ByteArray {
         val updatedHeader = header.copyOf()
 
-        // 更新 RIFF ChunkSize (文件总大小 - 8)
-        val chunkSize = dataSize + 36 // 36 = 头部固定长度
+        // Update the RIFF ChunkSize (total file size - 8)
+        val chunkSize = dataSize + 36 // 36 = fixed header length
         ByteBuffer.wrap(updatedHeader, 4, 4)
             .order(ByteOrder.LITTLE_ENDIAN)
             .putInt(chunkSize)
 
-        // 更新 data 子块大小
+        // Update the data subchunk size
         ByteBuffer.wrap(updatedHeader, 40, 4)
             .order(ByteOrder.LITTLE_ENDIAN)
             .putInt(dataSize)
@@ -81,7 +81,7 @@ object AudioUtils {
         return updatedHeader
     }
 
-    // 扩展函数：以小端格式写入 Int
+    // Extension function: write an Int in little-endian format
     fun ByteArrayOutputStream.writeIntLE(value: Int) {
         val bytes = ByteBuffer.allocate(4)
             .order(ByteOrder.LITTLE_ENDIAN)
@@ -90,7 +90,7 @@ object AudioUtils {
         write(bytes)
     }
 
-    // 扩展函数：以小端格式写入 Short
+    // Extension function: write a Short in little-endian format
     fun ByteArrayOutputStream.writeShortLE(value: Short) {
         val bytes = ByteBuffer.allocate(2)
             .order(ByteOrder.LITTLE_ENDIAN)
@@ -108,16 +108,16 @@ object AudioUtils {
         val byteRate = sampleRate * numChannels * bitsPerSample / 8
         val blockAlign = numChannels * bitsPerSample / 8
 
-        val header = ByteArrayOutputStream(44) // WAV 头固定大小为 44 字节
+        val header = ByteArrayOutputStream(44) // The WAV header has a fixed size of 44 bytes
         DataOutputStream(header).use { dos ->
             // RIFF chunk
             dos.writeBytes("RIFF")             // ChunkID
-            dos.writeInt(Integer.reverseBytes(36 + dataSize)) // ChunkSize (整个文件大小 - 8)
+            dos.writeInt(Integer.reverseBytes(36 + dataSize)) // ChunkSize (entire file size - 8)
             dos.writeBytes("WAVE")             // Format
 
             // fmt sub-chunk
             dos.writeBytes("fmt ")             // Subchunk1ID
-            dos.writeInt(Integer.reverseBytes(16))         // Subchunk1Size (PCM 格式为 16)
+            dos.writeInt(Integer.reverseBytes(16))         // Subchunk1Size (16 for PCM format)
             dos.writeShort(java.lang.Short.reverseBytes(1.toShort()).toInt())    // AudioFormat (PCM = 1)
             dos.writeShort(java.lang.Short.reverseBytes(numChannels.toShort()).toInt()) // NumChannels
             dos.writeInt(Integer.reverseBytes(sampleRate))           // SampleRate
@@ -127,7 +127,7 @@ object AudioUtils {
 
             // data sub-chunk
             dos.writeBytes("data")             // Subchunk2ID
-            dos.writeInt(Integer.reverseBytes(dataSize))         // Subchunk2Size (音频数据大小)
+            dos.writeInt(Integer.reverseBytes(dataSize))         // Subchunk2Size (audio data size)
         }
         return header.toByteArray()
     }

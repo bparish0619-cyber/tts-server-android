@@ -13,7 +13,7 @@ jobs:
   build:
     strategy:
       matrix:
-        product: [ { name: "App原版", value: app, lzyId: "9493563" }, { name: "Dev共存版", value: dev, lzyId: "7381570" } ]
+        product: [ { name: "Original App", value: app, lzyId: "9493563" }, { name: "Dev (side-by-side)", value: dev, lzyId: "7381570" } ]
 
       fail-fast: false
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
           echo ALIAS_PASSWORD='${{ secrets.ALIAS_PASSWORD }}' >> local.properties
           echo KEY_PASSWORD='${{ secrets.KEY_PASSWORD }}' >> local.properties
           echo KEY_PATH='./key.jks' >> local.properties
-          # 从Secrets读取无换行符Base64解码, 然后保存到到app/key.jks
+          # Read the newline-free Base64 value from Secrets, decode it, and save it to app/key.jks
           echo ${{ secrets.KEY_STORE }} | base64 --decode > $GITHUB_WORKSPACE/app/key.jks
 
       - name: Build with Gradle
@@ -84,4 +84,4 @@ jobs:
           
 #          echo "app: https://jing332.lanzn.com/b09jpjd2d"
 #          echo "dev: https://jing332.lanzn.com/b09ig9qla"
-#          echo "密码PWD: 1234"
+#          echo "Password PWD: 1234"

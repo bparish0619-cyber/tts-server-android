@@ -47,7 +47,7 @@ object ImportConfigFactory {
     }
 
     /**
-     * @return 是否识别成功
+     * @return whether it was recognized successfully
      */
     fun Context.gotoEditorFromJS(js: String): Boolean {
         if (js.contains("PluginJS")) {

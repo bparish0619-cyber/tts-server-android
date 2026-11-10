@@ -13,14 +13,14 @@
 
 -keepnames class * extends java.lang.Exception
 
-# 判断SVG库是否存在 (io.noties.markwon.image.svg.SvgSupport)
+# Check whether the SVG library exists (io.noties.markwon.image.svg.SvgSupport)
 -keepnames class com.caverock.androidsvg.SVG
 
 
 # OKIO
 -keep class okio.* { *; }
 
-# 保持 ViewBinding 实现类中的所有名称以 “inflate” 开头的方法不被混淆
+# Keep all methods whose names start with 'inflate' in ViewBinding implementation classes from being obfuscated
 -keepclassmembers class * implements androidx.viewbinding.ViewBinding {
     public static ** inflate(...);
 }

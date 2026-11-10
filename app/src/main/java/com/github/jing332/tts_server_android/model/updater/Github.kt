@@ -33,7 +33,7 @@ object Github {
 //        @SerialName("author")
 //        val author: Author = Author(),
 //        @SerialName("body")
-        val body: String = "", // > 未知CPU架构？请优先选择体积最大的APK### 更新内容：- 系统通知内容中支持显示局域网IP
+        val body: String = "", // > Unknown CPU architecture? Please prefer the largest APK. ### What's new: - System notifications can now show the LAN IP
 //        @SerialName("created_at")
 //        val createdAt: String = "", // 2023-08-16T03:02:15Z
 //        @SerialName("draft")

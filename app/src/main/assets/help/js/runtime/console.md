@@ -1,6 +1,6 @@
 # Console
 
-> 日志输出
+> Log output
 > 
 ```javascript
 console.log("format: %s", "str")
@@ -10,7 +10,7 @@ console.warn("warn", 123)
 console.error("error", 200)
 console.trace("trace")
 
-// 以下为旧版
+// Legacy API below
 logger.t("t")
 logger.d("d")
 logger.i("i")

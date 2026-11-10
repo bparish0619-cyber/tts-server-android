@@ -30,7 +30,7 @@ data class WorkflowRuns(
         @SerialName("created_at")
         val createdAt: String = "", // 2024-01-22T01:49:46Z
         @SerialName("display_title")
-        val displayTitle: String = "", // refactor: 插件UI 滑动条
+        val displayTitle: String = "", // refactor: plugin UI slider
 //        @SerialName("event")
 //        val event: String = "", // push
 //        @SerialName("head_branch")
@@ -133,7 +133,7 @@ data class WorkflowRuns(
              @SerialName("id")
              val id: String = "", // 3f23a7603a75b9218e61554fd5ec69fe6377abc4
              @SerialName("message")
-             val message: String = "", // refactor: 插件UI 滑动条
+             val message: String = "", // refactor: plugin UI slider
              @SerialName("timestamp")
              val timestamp: String = "", // 2024-01-22T01:49:33Z
              @SerialName("tree_id")
@@ -181,7 +181,7 @@ data class WorkflowRuns(
              @SerialName("deployments_url")
              val deploymentsUrl: String = "", // https://api.github.com/repos/jing332/tts-server-android/deployments
              @SerialName("description")
-             val description: String = "", // 这是一个Android系统TTS应用，内置微软演示接口，可自定义HTTP请求，可导入其他本地TTS引擎，以及根据中文双引号的简单旁白/对话识别朗读 ，还有自动重试，备用配置，文本替换等更多功能。
+             val description: String = "", // This is an Android system TTS app with a built-in Microsoft demo interface. It supports custom HTTP requests, importing other local TTS engines, and simple narration/dialogue recognition and reading based on Chinese double quotation marks, plus auto retry, backup configurations, text replacement, and more.
              @SerialName("downloads_url")
              val downloadsUrl: String = "", // https://api.github.com/repos/jing332/tts-server-android/downloads
              @SerialName("events_url")
@@ -317,7 +317,7 @@ data class WorkflowRuns(
              @SerialName("deployments_url")
              val deploymentsUrl: String = "", // https://api.github.com/repos/jing332/tts-server-android/deployments
              @SerialName("description")
-             val description: String = "", // 这是一个Android系统TTS应用，内置微软演示接口，可自定义HTTP请求，可导入其他本地TTS引擎，以及根据中文双引号的简单旁白/对话识别朗读 ，还有自动重试，备用配置，文本替换等更多功能。
+             val description: String = "", // This is an Android system TTS app with a built-in Microsoft demo interface. It supports custom HTTP requests, importing other local TTS engines, and simple narration/dialogue recognition and reading based on Chinese double quotation marks, plus auto retry, backup configurations, text replacement, and more.
              @SerialName("downloads_url")
              val downloadsUrl: String = "", // https://api.github.com/repos/jing332/tts-server-android/downloads
              @SerialName("events_url")

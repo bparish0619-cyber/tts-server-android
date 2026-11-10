@@ -93,7 +93,7 @@ open class JsNet(private val engineId: String) {
 
         form.forEach { entry ->
             when (entry.value) {
-                // 文件表单
+                // File form
                 is Map<*, *> -> {
                     val filePartMap = entry.value as Map<String, Any>
                     val fileName = filePartMap["fileName"] as? String
@@ -111,7 +111,7 @@ open class JsNet(private val engineId: String) {
                     multipartBody.addFormDataPart(entry.key, fileName, requestBody)
                 }
 
-                // 常规表单
+                // Regular form
                 else -> multipartBody.addFormDataPart(entry.key, entry.value as String)
             }
         }

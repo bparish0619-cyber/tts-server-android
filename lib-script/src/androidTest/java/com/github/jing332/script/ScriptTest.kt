@@ -103,9 +103,9 @@ class ScriptTest {
             println(it.level.toLogLevelChar() + ": " + it.message)
         }
 
-        // 测试两次执行环境是否独立
-        // 即每次调用初始化新的scope
-        // global 作为 scope.prototype 以复用
+        // Test whether two execution environments are independent
+        // That is, each invocation initializes a new scope
+        // global is used as scope.prototype for reuse
         e.execute(StringScriptSource("""a=111; console.log(globalThis.a)"""))
         val ret = e.execute(StringScriptSource("""globalThis.a == undefined"""))
         assert(ret == true)

@@ -105,7 +105,7 @@ class SpeechRuleEngine(
     }
 
     /** ['dialogue']['role']= List<TagData>
-     *@param tagsDataSet 例： key: dialogue, value: map(key: role, value: [{tagDataId:111, 张三, 李四])
+     *@param tagsDataSet example: key: dialogue, value: map(key: role, value: [{tagDataId:111, Zhang San, Li Si])
      */
     fun handleText(
         text: String,

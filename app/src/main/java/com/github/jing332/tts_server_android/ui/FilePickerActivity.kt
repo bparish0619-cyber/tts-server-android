@@ -334,7 +334,7 @@ class FilePickerActivity : ComposeActivity() {
         val fileName: String = "ttsrv-file.json",
         val fileMime: String = "text/*",
 
-        // 大数据使用Binder传递 这里只是负责临时存取
+        // Large data is passed via a Binder; this only handles temporary storage
         @IgnoredOnParcel
         @Suppress("ArrayInDataClass")
         var fileBytes: ByteArray? = null

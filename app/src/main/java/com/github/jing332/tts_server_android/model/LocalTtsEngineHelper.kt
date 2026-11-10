@@ -27,7 +27,7 @@ class LocalTtsEngine(val context: Context) {
 
 
     /**
-     * @return 是否成功
+     * @return whether it succeeded
      */
     suspend fun setEngine(name: String): Boolean = coroutineScope {
         shutdown()
@@ -39,7 +39,7 @@ class LocalTtsEngine(val context: Context) {
             if (status == TextToSpeech.SUCCESS) break
             else if (status != INIT_STATUS_WAITING) {
                 tts = null
-                return@coroutineScope false // 初始化失败
+                return@coroutineScope false // Initialization failed
             }
 
             try {
@@ -47,7 +47,7 @@ class LocalTtsEngine(val context: Context) {
             } catch (_: CancellationException) {
             }
         }
-        if (!isActive) { // 取消了
+        if (!isActive) { // Cancelled
             tts = null
             return@coroutineScope false
         }

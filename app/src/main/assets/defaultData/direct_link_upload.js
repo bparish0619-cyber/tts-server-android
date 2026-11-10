@@ -1,5 +1,5 @@
 let DirectUploadJS = {
-    "橘途网盘 (永久有效)": function(config) {
+    "Jutu Cloud Drive (permanently valid)": function(config) {
         let resp = upload('http://v2.jt12.de/up-v2.php', config)
         let str = resp.body().string()
         let result = JSON.parse(str)
@@ -10,7 +10,7 @@ let DirectUploadJS = {
         return result['msg']
     },
 
-    "喵公子 (有效期2天)": function(config) {
+    "Miaogongzi (valid for 2 days)": function(config) {
         let url = 'https://sy.mgz6.com/shuyuan'
         let resp = upload(url, config)
         let result = JSON.parse(resp.body().string())
@@ -21,7 +21,7 @@ let DirectUploadJS = {
         return url + '/' + result['data']
     },
 
-    "Catbox (有效期未知)": function(config) {
+    "Catbox (validity unknown)": function(config) {
         let form = {
             'fileToUpload': {
                 'body': config,

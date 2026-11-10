@@ -46,14 +46,14 @@ class WebSocketClient : WebSocketListener() {
     }
 
     /**
-     * 同步连接WS
-     * @return 是否成功
+     * Connect to the WebSocket synchronously
+     * @return Whether it succeeded
      */
     suspend fun connectSync(url: String): Boolean = connectSync(Request.Builder().url(url).build())
 
     /**
-     * 重连WS
-     * @return 是否成功
+     * Reconnect to the WebSocket
+     * @return Whether it succeeded
      */
     suspend fun reConnect() = connectSync(webSocket.request())
 

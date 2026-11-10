@@ -1,9 +1,9 @@
 let SpeechRuleJS = {
-    name: "旁白/对话",
+    name: "Narration/Dialogue",
     id: "ttsrv.multi_voice",
     author: "TTS Server",
     version: 4,
-    tags: {narration: "旁白", dialogue: "对话"},
+    tags: {narration: "Narration", dialogue: "Dialogue"},
 
     handleText(text) {
         const list = [];

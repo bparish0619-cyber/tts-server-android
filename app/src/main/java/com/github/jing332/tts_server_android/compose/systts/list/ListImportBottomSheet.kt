@@ -93,7 +93,7 @@ private fun getImportList(
             }*/
         return null
     } else {
-        return if (json.contains("\"group\"")) { // 新版数据结构
+        return if (json.contains("\"group\"")) { // New data structure
             if (json.contains("\"config\"") && json.contains("\"source\"")) {
                 AppConst.jsonBuilder.decodeFromString<List<GroupWithSystemTts>>(json)
             } else {

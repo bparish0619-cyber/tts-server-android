@@ -29,7 +29,7 @@ fun rememberOverlayController(): OverlayController {
     }
 }
 
-// 自定义 Saver
+// Custom Saver
 private val OverlayControllerSaver = Saver<OverlayController, Boolean>(
     save = { it.visible },
     restore = { savedVisibility ->

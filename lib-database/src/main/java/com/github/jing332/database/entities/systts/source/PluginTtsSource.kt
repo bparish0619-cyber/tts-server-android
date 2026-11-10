@@ -32,7 +32,7 @@ data class PluginTtsSource(
 
 
     override fun getKey(): String {
-        // 防止 CachedEngineManager 创建单例 Engine
+        // Prevent CachedEngineManager from creating a singleton Engine
         return pluginId
     }
 }

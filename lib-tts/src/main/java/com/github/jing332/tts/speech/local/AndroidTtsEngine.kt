@@ -145,7 +145,7 @@ class AndroidTtsEngine(
                 return@coroutineScope Err(TtsEngineError.Engine)
             }
 
-            // 使用 suspendCancellableCoroutine 等待合成完成
+            // Use suspendCancellableCoroutine to wait for synthesis to complete
             suspendCancellableCoroutine<Result<File, TtsEngineError>> { continuation ->
                 tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
                     override fun onStart(utteranceId: String?) {
@@ -156,9 +156,9 @@ class AndroidTtsEngine(
                     }
 
                     override fun onError(utteranceId: String?) {
-                        // 合成出错，删除文件并返回错误
+                        // Synthesis failed; delete the file and return an error
                         delete()
-                        continuation.resume(Err(TtsEngineError.Engine)) // 可以考虑更具体的错误
+                        continuation.resume(Err(TtsEngineError.Engine)) // A more specific error could be considered
                     }
 
                 })

@@ -17,19 +17,19 @@ object StringUtils {
         SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
     /**
-     *  是否为不发音的字符串
+     *  Whether the string is silent (not pronounced)
      */
     fun isSilent(s: String): Boolean {
         return silentPattern.matcher(s).replaceAll("").isEmpty()
     }
 
     /**
-     * 分割长句并保留分隔符
+     * Split long sentences while keeping the delimiters
      */
     fun splitSentences(s: String): List<String> {
         val m = splitSentencesRegex.matcher(s)
         val list = splitSentencesRegex.split(s)
-        //保留分隔符
+        // Keep the delimiters
         if (list.isNotEmpty()) {
             var count = 0
             while (count < list.size) {
@@ -44,7 +44,7 @@ object StringUtils {
     }
 
     /**
-     * 限制字符串长度
+     * Limit the string length
      */
     fun String.limitLength(maxLength: Int = 20, suffix: String = ""): String {
         return if (length >= maxLength)
@@ -55,7 +55,7 @@ object StringUtils {
 }
 
 /**
- * json字符串头尾加[ ]
+ * Wrap a JSON string with [ ] at the start and end
  */
 fun String.toJsonListString(): String {
     var s = this.trim().removeSuffix(",")
@@ -66,7 +66,7 @@ fun String.toJsonListString(): String {
 
 
 /**
- * 字符串中汉字数量
+ * Number of Chinese characters in the string
  */
 fun String.lengthOfChinese(): Int {
     var count = 0
@@ -79,7 +79,7 @@ fun String.lengthOfChinese(): Int {
 }
 
 /**
- * 转为html粗体标签
+ * Convert to an HTML bold tag
  */
 fun String.toHtmlBold(): String {
     return "<b>$this</b>"

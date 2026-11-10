@@ -39,7 +39,7 @@ class TtsPluginEngineTest {
                     console.log(ttsrv.userVars)
                 },
                 
-                // 无 getAudio() 时调用
+                // Called when there is no getAudio()
                 'getAudioV2': function(request, callback){
                     console.log(request)    
                 },
@@ -64,7 +64,7 @@ class TtsPluginEngineTest {
             } 
 
             let EditorJS = {
-                //在编辑TTS界面保存时调用
+                // Called when saving on the Edit TTS screen
                 'getAudioSampleRate': function(locale, voice) {
                     let audio = PluginJS.getAudio('test', locale, voice, 50, 50, 50)
                     let rate = ttsrv.getAudioSampleRate(audio)
@@ -127,7 +127,7 @@ class TtsPluginEngineTest {
                 console.log("onLoad")
             },
             
-            // 无 getAudio() 时调用
+            // Called when there is no getAudio()
             'getAudioV2': function(request, callback){
                 console.log(request)    
             },

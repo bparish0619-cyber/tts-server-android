@@ -15,21 +15,21 @@ data class ReplaceRule(
     @PrimaryKey(autoGenerate = true)
     var id: Long = System.currentTimeMillis(),
 
-    // 所属组的ID
+    // ID of the group it belongs to
     @ColumnInfo(defaultValue = DEFAULT_GROUP_ID.toString())
     var groupId: Long = DEFAULT_GROUP_ID,
 
-    // 显示名称
+    // Display name
     var name: String = "",
-    // 是否启用
+    // Whether it is enabled
     var isEnabled: Boolean = true,
-    // 是否正则
+    // Whether it is a regular expression
     var isRegex: Boolean = false,
-    // 匹配
+    // Pattern to match
     var pattern: String = "",
-    // 替换为
+    // Replacement
     var replacement: String = "",
-    // 索引 排序用
+    // Index, used for sorting
     @ColumnInfo(defaultValue = "0")
     var order: Int = 0,
 

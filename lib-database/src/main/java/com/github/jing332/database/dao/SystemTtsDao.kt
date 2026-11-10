@@ -72,13 +72,13 @@ interface SystemTtsDao {
     fun getTtsListByGroupId(groupId: Long): List<SystemTts>
 
     /**
-     * 所有TTS 是否启用
+     * Whether all TTS entries are enabled
      */
     @Query("UPDATE sysTts SET isEnabled = :isEnabled")
     fun setAllTtsEnabled(isEnabled: Boolean)
 
     /**
-     * 设置某个组中的所有TTS 是否启用
+     * Set whether all TTS entries in a group are enabled
      */
     @Query("UPDATE sysTts SET isEnabled = :isEnabled WHERE groupId = :groupId")
     fun setTtsEnabledInGroup(groupId: Long, isEnabled: Boolean)
@@ -109,7 +109,7 @@ interface SystemTtsDao {
     fun getSysTtsWithGroups(): List<GroupWithSystemTts>
 
     /**
-     * 删除组以及TTS
+     * Delete a group and its TTS entries
      */
     fun deleteGroupAndTts(group: SystemTtsGroup) {
         deleteTtsByGroup(group.id)
@@ -118,7 +118,7 @@ interface SystemTtsDao {
 
 
     /**
-     * 按照分组和分组内进行排序获取
+     * Retrieve sorted by group and then within each group
      */
     fun getEnabledListForSort(target: Int, isStandbyType: Boolean = false): List<SystemTts> {
         val list = mutableListOf<SystemTts>()

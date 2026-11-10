@@ -23,7 +23,7 @@ fun TextFieldDialog(
         },
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text("确定")
+                Text("OK")
             }
         }
     )

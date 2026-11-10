@@ -225,7 +225,7 @@ fun LabelSlider(
 @Composable
 fun PreviewSlider() {
     var value by remember { mutableFloatStateOf(0f) }
-    val str = "语速: $value"
+    val str = "Speech rate: $value"
     LabelSlider(
         value = value,
         onValueChange = { value = it },

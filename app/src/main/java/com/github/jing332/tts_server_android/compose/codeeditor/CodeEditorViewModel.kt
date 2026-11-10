@@ -25,7 +25,7 @@ class CodeEditorViewModel(val app: Application) : AndroidViewModel(app) {
     private var mError = MutableStateFlow<Error>(Error.Empty)
     internal val error get() = mError.asSharedFlow()
 
-    // 代码同步服务器
+    // Code sync server
     fun startSyncServer(
         port: Int,
         onPush: (code: String) -> Unit,

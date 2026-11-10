@@ -50,7 +50,7 @@ import kotlin.math.max
 
 //val CustomColorKey = SemanticsPropertyKey<String>("Label")
 //
-//// 2. (可选) 定义合并策略。这里我们选择使用父组件的值。
+//// 2. (Optional) Define the merge policy. Here we choose to use the parent component's value.
 //val CustomColorKeyWithParentPriority = SemanticsPropertyKey<String>(
 //    name = "Label",
 //    mergePolicy = { parentValue, childValue -> parentValue }
@@ -164,7 +164,7 @@ fun DropdownTextField(
 private fun PreviewDropdownTextField() {
     var key by remember { mutableIntStateOf(1) }
     DropdownTextField(
-        labelText = "所属分组",
+        labelText = "Group",
         value = key,
         values = listOf(1, 2, 3),
         entries = listOf("1", "2", "3"),

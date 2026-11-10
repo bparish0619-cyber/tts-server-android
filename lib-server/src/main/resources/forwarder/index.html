@@ -10,14 +10,14 @@
 <body>
 <nav>
     <a class="navbar-brand github-button" href="https://github.com/jing332/tts-server-android" data-size="large"
-       data-show-count="true" aria-label="前往Github项目 / Star project on GitHub">tts-server-android</a>
+       data-show-count="true" aria-label="Star this project on GitHub">tts-server-android</a>
 </nav>
 <div class="container" style="margin-top: 10px;">
     <div class="row">
         <div class="col">
-            <label id="label_engine" for="select_engine"> TTS引擎 (Engine)</label>
+            <label id="label_engine" for="select_engine"> TTS Engine</label>
             <select class="form-select" id="select_engine" onchange="engineChanged()">
-                <option value="">加载中/Loading</option>
+                <option value="">Loading</option>
             </select>
         </div>
     </div>
@@ -25,23 +25,23 @@
 
     <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="switch_custom" onchange="switchCustomChanged()">
-        <label class="form-check-label" for="switch_custom">自定义 (Custom)</label>
+        <label class="form-check-label" for="switch_custom">Custom</label>
     </div>
 
     <div class="collapse" id="customVoiceCollapse">
         <div class="card card-body">
             <div class="col">
-                <label id="label_locale" for="select_locale"> 地区 (Locale)</label>
+                <label id="label_locale" for="select_locale"> Locale</label>
                 <select class="form-select" id="select_locale" onchange="localeChanged()">
-                    <option value="">加载中/Loading</option>
+                    <option value="">Loading</option>
                 </select>
             </div>
 
             <div class="row">
                 <div class="col">
-                    <label id="label_voice" for="select_voice"> 声音 (Voice)</label>
+                    <label id="label_voice" for="select_voice"> Voice</label>
                     <select class="form-select" id="select_voice" onchange="voiceChanged()">
-                        <option value="">加载中/Loading</option>
+                        <option value="">Loading</option>
                     </select>
                 </div>
             </div>
@@ -51,21 +51,21 @@
 
     <div class="row" style="margin-top: 10px">
         <div class="col">
-            <label for="textarea_test"> 测试文本 (Sample text)</label>
-            <textarea class="form-control" id="textarea_test" rows="4">如果喜欢这个项目的话请点个Star吧。&#13;If you like this project, please click Star.</textarea>
+            <label for="textarea_test"> Sample text</label>
+            <textarea class="form-control" id="textarea_test" rows="4">If you like this project, please give it a Star.</textarea>
         </div>
     </div>
 
     <div class="row" style="margin-top: 10px">
         <div class="col">
             <label>
-                语速 (Speed)
+                Speed
                 <input id="input_rate" class="form-control" type="number" value="50" style="max-width: 100px"
                        oninput="if(value>100){value=100}else if (value <1){value=1}">
             </label>
 
             <label style="padding-left: 10px">
-                音调 (Pitch)
+                Pitch
                 <input id="input_pitch" class="form-control" type="number" value="100" max="300" min="1"
                        style="max-width: 100px;"
                        oninput="if(value>300){value=300}else if (value <1){value=1}">
@@ -77,15 +77,14 @@
         <div class="col">
             <button class="btn btn-primary" id="btn_test" onclick="onBtnTestClick()">
                 <span class="spinner-border spinner-border-sm" id="btn_test_load" hidden="hidden"></span>
-                测试 (Test)
+                Test
             </button>
-            <button class="btn btn-success" id="btn_import_legado" onclick="onBtnImportClick()">阅读 Legado</button>
+            <button class="btn btn-success" id="btn_import_legado" onclick="onBtnImportClick()">Legado</button>
         </div>
     </div>
 
     <div class="col" style="margin-top: 10px">
         <audio controls="controls" id="audio">
-            你的浏览器不支持 &lt;audio&gt; 音频标签。
             Your browser does not support the &lt;audio&gt; tag.
             <source id="source" src="" type="audio/wav"/>
         </audio>
@@ -98,7 +97,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">阅读链接</h5>
+                <h5 class="modal-title">Legado link</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -107,15 +106,15 @@
                               cols="2"></textarea>
                     <button id="copyBtn" class="btn btn-dark btn-sm"
                             style="--bs-btn-font-size: 10px;position:absolute;right:0;top:0;z-index: 20"
-                            onclick="copyLegadoUrl()">复制
+                            onclick="copyLegadoUrl()">Copy
                     </button>
 
                 </div>
                 <div class="alert alert-primary" role="alert">
-                    请在阅读的朗读引擎设置中选择网络导入此链接。
+                    In Legado's read-aloud engine settings, choose network import and use this link.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="onBtnOneImportClick()">一键导入</button>
+                    <button type="button" class="btn btn-success" onclick="onBtnOneImportClick()">One-click import</button>
                 </div>
             </div>
         </div>
@@ -149,7 +148,7 @@
             switchCustomChanged()
         }
 
-        sampleTextElement.value = storageSampleText.trim().length === 0 ? "如果喜欢这个项目的话请点个Star吧。\nIf you like this project, please click Star." : storageSampleText
+        sampleTextElement.value = storageSampleText.trim().length === 0 ? "If you like this project, please click Star." : storageSampleText
     }
 
     window.onbeforeunload = function () {
@@ -187,27 +186,26 @@
             updateEngine()
         })
         .catch(reason => {
-            alert("加载引擎数据失败\n" +
-                "Failed to load engine data: \n" +
+            alert("Failed to load engine data: \n" +
                 reason)
         })
 
-    /* 复制导入链接 */
+    /* Copy the import link */
     function copyLegadoUrl() {
         let copyBtn = $('#copyBtn')[0]
         copyBtn.disabled = true
         setTimeout(function () {
-            copyBtn.innerText = "复制"
+            copyBtn.innerText = "Copy"
             copyBtn.disabled = false
         }, 2000)
 
         try {
             document.getElementById("legadoUrl").select()
             let ok = document.execCommand("copy");
-            if (ok) copyBtn.innerText = "已复制到剪贴板"
-            else copyBtn.innerText = "复制失败 请手动复制"
+            if (ok) copyBtn.innerText = "Copied to clipboard"
+            else copyBtn.innerText = "Copy failed, please copy it manually"
         } catch (e) {
-            copyBtn.innerText = "复制失败 请手动复制"
+            copyBtn.innerText = "Copy failed, please copy it manually"
         }
     }
 
@@ -318,8 +316,7 @@
                 updateLocaleAndVoice()
             })
             .catch(reason => {
-                alert("加载语音数据失败\n" +
-                    "Failed to load voice data: \n" +
+                alert("Failed to load voice data: \n" +
                     reason)
             })
     }

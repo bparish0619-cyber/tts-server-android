@@ -100,7 +100,7 @@ interface SystemTtsV2Dao {
     }
 
     /**
-     * 按照分组和分组内进行排序获取
+     * Retrieve sorted by group and then within each group
      */
     fun getEnabledListForSort(target: Int, isStandbyType: Boolean = false): List<SystemTtsV2> {
         val list = mutableListOf<SystemTtsV2>()

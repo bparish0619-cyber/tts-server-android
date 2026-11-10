@@ -135,7 +135,7 @@ fun ViewGroup.setMarginMatchParent() {
 }
 
 /**
- * 重启当前 Activity
+ * Restart the current Activity
  */
 fun Activity.restart() {
     finish()
@@ -156,7 +156,7 @@ val Activity.displayHeight: Int
     }
 
 /**
- * 点击防抖动
+ * Click debouncing
  */
 fun View.clickWithThrottle(throttleTime: Long = 600L, action: (v: View) -> Unit) {
     this.setOnClickListener(object : View.OnClickListener {
@@ -172,7 +172,7 @@ fun View.clickWithThrottle(throttleTime: Long = 600L, action: (v: View) -> Unit)
 }
 
 /**
- * View 是否在屏幕上可见
+ * Whether the View is visible on screen
  */
 fun View.isVisibleOnScreen(): Boolean {
     if (!isShown) {
@@ -188,12 +188,12 @@ fun View.isVisibleOnScreen(): Boolean {
 
 
 /**
- * 绑定返回键回调（建议使用该方法）
+ * Bind a back-press callback (this method is recommended)
  * @param owner Receive callbacks to a new OnBackPressedCallback when the given LifecycleOwner is at least started.
  * This will automatically call addCallback(OnBackPressedCallback) and remove the callback as the lifecycle state changes. As a corollary, if your lifecycle is already at least started, calling this method will result in an immediate call to addCallback(OnBackPressedCallback).
  * When the LifecycleOwner is destroyed, it will automatically be removed from the list of callbacks. The only time you would need to manually call OnBackPressedCallback.remove() is if you'd like to remove the callback prior to destruction of the associated lifecycle.
- * @param onBackPressed 回调方法；返回true则表示消耗了按键事件，事件不会继续往下传递，相反返回false则表示没有消耗，事件继续往下传递
- * @return 注册的回调对象，如果想要移除注册的回调，直接通过调用[OnBackPressedCallback.remove]方法即可。
+ * @param onBackPressed Callback method; returning true means the key event is consumed and will not be passed further down, while returning false means it is not consumed and the event continues to propagate
+ * @return The registered callback object; to remove a registered callback, simply call [OnBackPressedCallback.remove].
  */
 fun androidx.activity.ComponentActivity.addOnBackPressed(
     owner: LifecycleOwner,
@@ -205,7 +205,7 @@ fun androidx.activity.ComponentActivity.addOnBackPressed(
 }
 
 /**
- * 绑定返回键回调，未关联生命周期，建议使用关联生命周期的办法（尤其在fragment中使用，应该关联fragment的生命周期）
+ * Bind a back-press callback without associating a lifecycle; using the lifecycle-associated approach is recommended (especially in fragments, where it should be associated with the fragment's lifecycle)
  */
 fun androidx.activity.ComponentActivity.addOnBackPressed(onBackPressed: () -> Boolean): OnBackPressedCallback {
     return backPressedCallback(onBackPressed).also {

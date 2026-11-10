@@ -11,16 +11,16 @@ class SpeechRuleEngineContext(
 ) : JsExtensions(context, engineId) {
 
     /**
-     * 创建一个分词器， 这是一个工厂方法
+     * Create a tokenizer. This is a factory method.
      * Params:
-     * algorithm – 分词算法，传入算法的中英文名都可以，可选列表：
-     * 维特比 (viterbi)：效率和效果的最佳平衡
-     * 双数组trie树 (dat)：极速词典分词，千万字符每秒
-     * 条件随机场 (crf)：分词、词性标注与命名实体识别精度都较高，适合要求较高的NLP任务
-     * 感知机 (perceptron)：分词、词性标注与命名实体识别，支持在线学习
-     * N最短路 (nshort)：命名实体识别稍微好一些，牺牲了速度
+     * algorithm – the tokenization algorithm; either its Chinese or English name can be passed. Options:
+     * 维特比 (viterbi): the best balance of efficiency and quality
+     * 双数组trie树 (dat): extremely fast dictionary-based tokenization, tens of millions of characters per second
+     * 条件随机场 (crf): high accuracy for tokenization, part-of-speech tagging, and named entity recognition; suited to demanding NLP tasks
+     * 感知机 (perceptron): tokenization, part-of-speech tagging, and named entity recognition, with support for online learning
+     * N最短路 (nshort): slightly better named entity recognition, at the cost of speed
      * Returns:
-     * 一个分词器
+     * A tokenizer
      */
     @JvmOverloads
     @ScriptInterface

@@ -1,7 +1,7 @@
 package com.github.jing332.tts_server_android.compose.theme
 
 import androidx.compose.ui.graphics.Color
-//默认
+// Default
 val bean_green_md_theme_light_primary = Color(0xFF376A20)
 val bean_green_md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val bean_green_md_theme_light_primaryContainer = Color(0xFFB7F398)
@@ -65,7 +65,7 @@ val bean_green_md_theme_dark_onSurfaceVariant = Color(0xFFC3C8BB)
 
 val bean_green_seed = Color(0xFF7B8B70)
 
-//蓝色
+// Blue
 val blue_md_theme_light_primary = Color(0xFF005AC1)
 val blue_md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val blue_md_theme_light_primaryContainer = Color(0xFFD8E2FF)

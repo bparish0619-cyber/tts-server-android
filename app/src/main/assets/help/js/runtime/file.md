@@ -1,7 +1,7 @@
 # File
 
-> 文件操作都使用 `fs` 对象  
-> 相对路径均为 `Android/data/com.github.jing332.tts_server_android/cache/`
+> All file operations use the `fs` object  
+> Relative paths are all under `Android/data/com.github.jing332.tts_server_android/cache/`
 > 
 ```javascript
 let bytes = new Uint8Array(2048)

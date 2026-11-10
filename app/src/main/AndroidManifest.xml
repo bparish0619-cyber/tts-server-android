@@ -194,7 +194,7 @@
             android:exported="false">
             <meta-data
                 android:name="autoStoreLocales"
-                android:value="false" /> <!-- 禁用Android自动存储语言 -->
+                android:value="false" /> <!-- Disable Android's automatic per-app language storage -->
         </service>
         <service
             android:name=".service.systts.SystemTtsService"

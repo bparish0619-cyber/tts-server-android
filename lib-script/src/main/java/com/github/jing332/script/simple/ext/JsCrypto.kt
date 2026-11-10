@@ -23,10 +23,10 @@ interface JsCrypto {
         return MD5Utils.md5Encode16(str)
     }
 
-    //******************对称加密解密************************//
+    //****************** Symmetric encryption/decryption ************************//
 
     /**
-     * 在js中这样使用
+     * Use it like this in JS
      * java.createSymmetricCrypto(transformation, key, iv).decrypt(data)
      * java.createSymmetricCrypto(transformation, key, iv).decryptStr(data)
 
@@ -35,7 +35,7 @@ interface JsCrypto {
      * java.createSymmetricCrypto(transformation, key, iv).encryptHex(data)
      */
 
-    /* 调用SymmetricCrypto key为null时使用随机密钥*/
+    /* When calling SymmetricCrypto, a random key is used if key is null */
     @ScriptInterface
     fun createSymmetricCrypto(
         transformation: String,
@@ -111,26 +111,26 @@ interface JsCrypto {
     }
 
 
-    /* HexString 解码为字节数组 */
+    /* Decode a hex string to a byte array */
     @ScriptInterface
     fun hexDecodeToByteArray(hex: String): ByteArray? {
         return HexUtil.decodeHex(hex)
     }
 
-    /* hexString 解码为utf8String*/
+    /* Decode a hex string to a UTF-8 string */
     @ScriptInterface
     fun hexDecodeToString(hex: String): String? {
         return HexUtil.decodeHexStr(hex)
     }
 
     @ScriptInterface
-    /* utf8 编码为hexString */
+    /* Encode UTF-8 to a hex string */
     fun hexEncodeToString(utf8: String): String? {
         return HexUtil.encodeHexStr(utf8)
     }
 
     /**
-     * 格式化时间
+     * Format a time
      */
     @ScriptInterface
     fun timeFormatUTC(time: Long, format: String, sh: Int): String? {
@@ -142,7 +142,7 @@ interface JsCrypto {
     }
 
     /**
-     * 时间格式化
+     * Time formatting
      */
     @ScriptInterface
     fun timeFormat(time: Long): String {
@@ -150,7 +150,7 @@ interface JsCrypto {
     }
 
     /**
-     * utf8编码转gbk编码
+     * Convert UTF-8 encoding to GBK encoding
      */
     @ScriptInterface
     fun utf8ToGbk(str: String): String {

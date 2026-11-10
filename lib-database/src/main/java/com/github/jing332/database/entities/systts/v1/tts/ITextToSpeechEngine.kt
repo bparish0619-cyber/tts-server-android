@@ -34,29 +34,29 @@ sealed class ITextToSpeechEngine(
 
 
     /**
-     * 语速是否跟随系统
+     * Whether the speech rate follows the system
      */
     open fun isRateFollowSystem(): Boolean = rate == VALUE_FOLLOW_SYSTEM
 
     /**
-     * 音高是否跟随系统
+     * Whether the pitch follows the system
      */
     open fun isPitchFollowSystem(): Boolean = pitch == VALUE_FOLLOW_SYSTEM
 
     /**
-     * UI 右下角类型
+     * Type shown in the bottom-right corner of the UI
      */
     abstract fun getType(): String
 
     /**
-     * UI 底部的格式
+     * Format shown at the bottom of the UI
      */
     open fun getBottomContent(): String {
         return audioFormat.toString()
     }
 
     /**
-     * UI 显示名称下方的描述，如音量语速等
+     * Description shown below the display name in the UI, such as volume and speech rate
      */
     open fun getDescription(): String = ""
 
@@ -67,7 +67,7 @@ sealed class ITextToSpeechEngine(
     open fun onDestroy() {}
 
     /**
-     * 是否为 直接播放
+     * Whether to play directly
      */
     open fun isDirectPlay(): Boolean = false
 
@@ -75,7 +75,7 @@ sealed class ITextToSpeechEngine(
         false
 
     /**
-     * 播放音频 参数自动判断是否随系统
+     * Play audio; the parameters automatically determine whether to follow the system
      */
     open suspend fun startPlayWithSystemParams(
         text: String,
@@ -117,9 +117,9 @@ sealed class ITextToSpeechEngine(
 //    }
 
     /**
-     * 获取PCM音频流
+     * Get the PCM audio stream
      */
-    @Deprecated("暂时不用")
+    @Deprecated("Not used for now")
     open suspend fun getAudioStream(
         speakText: String,
         chunkSize: Int = 0,

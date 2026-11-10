@@ -39,7 +39,7 @@ private fun PreviewAppUpdateDialog() {
         AppUpdateDialog(
             onDismissRequest = {
                 show = false
-            }, version = "1.0.0", content = "## 更新内容\n\n- 123", downloadUrl = "url"
+            }, version = "1.0.0", content = "## What's New\n\n- 123", downloadUrl = "url"
         )
 
 }
@@ -136,10 +136,10 @@ fun AppUpdateDialog(
         buttons = {
             Row {
                 TextButton(onClick = { openDownloadUrl(downloadUrl) }) {
-                    Text("下载(Github)")
+                    Text("Download (GitHub)")
                 }
                 TextButton(onClick = { openDownloadUrl("https://ghproxy.com/${downloadUrl}") }) {
-                    Text("下载(ghproxy加速)")
+                    Text("Download (ghproxy mirror)")
                 }
             }
         }

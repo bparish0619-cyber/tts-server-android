@@ -47,13 +47,13 @@ private fun PreviewNestedList() {
 @Composable
 fun NestedLazyColumn(
     modifier: Modifier = Modifier,
-    list: List<Element>, // 外部传入的列表
-    onListChange: (List<Element>) -> Unit, // 列表更改后的回调
+    list: List<Element>, // The list passed in from outside
+    onListChange: (List<Element>) -> Unit, // Callback invoked after the list changes
     headerContent: @Composable BoxScope.(GroupElement) -> Unit,
     itemContent: @Composable BoxScope.(ItemElement) -> Unit
 ) {
     val state = rememberLazyListState()
-    // 内部维护的 cacheList，用于拖动时的实时更新
+    // Internally maintained cacheList, used for real-time updates while dragging
     val (cacheList, setCacheList) = remember { mutableStateOf(list) }
 
     val reorderState = rememberReorderableLazyListState(
@@ -61,12 +61,12 @@ fun NestedLazyColumn(
         onMove = { from, to ->
             val fromKey = from.key ?: return@rememberReorderableLazyListState
             val toKey = to.key ?: return@rememberReorderableLazyListState
-            // 更新 cacheList，实时响应 UI 变化
+            // Update cacheList to respond to UI changes in real time
             val newList = updateNestedList(cacheList, fromKey, toKey)
             setCacheList(newList)
         },
         onDragEnd = { _, _ ->
-            // 拖动结束后，调用 onListChange，通知外部状态
+            // After dragging ends, call onListChange to notify the external state
             onListChange(cacheList)
         }
     )
@@ -95,32 +95,32 @@ fun NestedLazyColumn(
     }
 
     LazyColumn(modifier = modifier.detectReorderAfterLongPress(reorderState), state = state) {
-        // 使用 cacheList 进行渲染
+        // Render using cacheList
         listContent(cacheList)
     }
 }
 
-// updateNestedList 和 findElementAndParent 函数与之前版本保持一致。
+// The updateNestedList and findElementAndParent functions remain the same as in the previous version.
 fun updateNestedList(list: List<Element>, fromKey: Any, toKey: Any): List<Element> {
-    // 使用 toMutableList() 创建一个可变的副本，避免修改原始列表
+    // Use toMutableList() to create a mutable copy, avoiding modification of the original list
     val newList = list.toMutableList()
 
-    // 查找 from 和 to 元素及其父元素
+    // Find the from and to elements and their parents
     val (fromElement, fromParent) = findElementAndParent(newList, fromKey)
     val (toElement, toParent) = findElementAndParent(newList, toKey)
 
     if (fromElement == null || toElement == null) {
-        return newList // 如果找不到元素，则返回原始列表
+        return newList // If the elements cannot be found, return the original list
     }
 
-    // 从原位置移除元素
+    // Remove the element from its original position
     if (fromParent != null) {
         fromParent.children.remove(fromElement)
     } else {
         newList.remove(fromElement)
     }
 
-    // 将元素插入到新位置
+    // Insert the element at the new position
     if (toParent != null) {
         val toIndex = toParent.children.indexOf(toElement)
         toParent.children.add(toIndex, fromElement)
@@ -132,7 +132,7 @@ fun updateNestedList(list: List<Element>, fromKey: Any, toKey: Any): List<Elemen
     return newList
 }
 
-// 辅助函数，用于查找元素及其父元素
+// Helper function used to find an element and its parent
 fun findElementAndParent(list: List<Element>, key: Any): Pair<Element?, GroupElement?> {
     fun find(elements: List<Element>, parent: GroupElement? = null): Pair<Element?, GroupElement?> {
         for (element in elements) {

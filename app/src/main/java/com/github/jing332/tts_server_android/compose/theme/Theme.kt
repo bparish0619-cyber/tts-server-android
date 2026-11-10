@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalView
 import com.github.jing332.tts_server_android.conf.AppConfig
 
 /**
- * 获取当前主题
+ * Get the current theme
  */
 @Composable
 fun appTheme(
@@ -37,7 +37,7 @@ fun appTheme(
         AppTheme.GRAY -> grayTheme(darkTheme)
     }
 
-//全局主题状态
+// Global theme state
 private val themeTypeState: MutableState<AppTheme> by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
     mutableStateOf(AppTheme.DEFAULT)
 }
@@ -54,7 +54,7 @@ private fun InitTheme() {
 }
 
 /**
- * 设置主题
+ * Set the theme
  */
 fun setAppTheme(themeType: AppTheme) {
     themeTypeState.value = themeType
@@ -62,12 +62,12 @@ fun setAppTheme(themeType: AppTheme) {
 }
 
 /**
- * 获取当前主题
+ * Get the current theme
  */
 fun getAppTheme(): AppTheme = themeTypeState.value
 
 /**
- * 根Context
+ * Root context
  */
 @Suppress("DEPRECATION")
 @Composable
@@ -76,10 +76,10 @@ fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    //初始化主题
+    // Initialize the theme
     InitTheme()
 
-    //获取当前主题
+    //Get the current theme
     val targetTheme = appTheme(themeType = themeTypeState.value)
     val activity = LocalView.current.context as ComponentActivity
 

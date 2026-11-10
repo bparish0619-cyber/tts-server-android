@@ -21,7 +21,7 @@ object ExoPlayerHelper {
             .createMediaSource(MediaItem.fromUri(""))
     }
 
-    // 创建音频媒体源
+    // Create the audio media source
     @SuppressLint("UnsafeOptInUsageError")
     fun createMediaSourceFromByteArray(context: Context, data: ByteArray): MediaSource {
         val factory = DataSource.Factory { ByteArrayDataSource(data) }

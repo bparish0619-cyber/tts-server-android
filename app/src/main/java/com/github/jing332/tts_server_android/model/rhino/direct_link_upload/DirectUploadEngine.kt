@@ -26,7 +26,7 @@ class DirectUploadEngine(
         get() = engine.get(OBJ_DIRECT_UPLOAD) as NativeObject
 
     /**
-     * 获取所有方法
+     * Get all methods
      */
     fun obtainFunctionList(): List<DirectUploadFunction> {
         engine.execute(StringScriptSource(code))

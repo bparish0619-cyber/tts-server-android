@@ -23,7 +23,7 @@ object FileUtils {
     }
 
     /**
-     * 复制文件夹
+     * Copy a folder
      */
     fun copyFilesFromDir(src: File, target: File, overwrite: Boolean = true) {
         target.mkdirs()
@@ -49,7 +49,7 @@ object FileUtils {
     }
 
     /**
-     * 按行读取txt
+     * Read a txt file line by line
      */
     fun InputStream.readAllText(): String {
         this.use {
@@ -85,7 +85,7 @@ object FileUtils {
     fun saveFile(file: File, data: ByteArray): Boolean {
         try {
             if (!exists(file)) {
-                if (file.parentFile?.exists() == false) /* 文件夹不存在则创建 */
+                if (file.parentFile?.exists() == false) /* Create the folder if it does not exist */
                     file.parentFile?.mkdirs()
             }
             val fos = FileOutputStream(file)
@@ -105,7 +105,7 @@ object FileUtils {
             if (file.isFile) {
                 fileList.add(file)
             } else if (file.isDirectory) {
-                // 如果是文件夹，则递归调用该方法
+                // If it is a folder, call this method recursively
                 fileList.addAll(getAllFilesInFolder(file))
             }
         }
@@ -113,7 +113,7 @@ object FileUtils {
     }
 
     /**
-     * 通过拓展名判断MIME
+     * Determine the MIME type from the file extension
      */
     val File.mimeType: String?
         get() {
@@ -223,7 +223,7 @@ object FileUtils {
     }
 
     /**
-     * UTF-8编码方式
+     * UTF-8 encoding
      * ----------------------------------------------
      * 0xxxxxxx
      * 110xxxxx 10xxxxxx
