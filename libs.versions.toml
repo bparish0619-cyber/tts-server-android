@@ -15,7 +15,7 @@ targetSdk = "36"
 coreKtx = "1.15.0"
 appcompat = "1.7.0"
 activityKtx = "1.10.1"
-room = '2.6.1'
+room = '2.8.5' # Bumped from 2.6.1: Room 2.6.1's processor breaks under KSP2 (Kotlin 2.2) on vararg DAO methods; 2.8.x supports KSP2.
 # AGP (Android Gradle Plugin). CHANGE-ME: must support the compileSdk above.
 # AGP 8.13.x is the line that supports API 36; it requires Gradle 8.13+.
 agp = "8.13.2"
