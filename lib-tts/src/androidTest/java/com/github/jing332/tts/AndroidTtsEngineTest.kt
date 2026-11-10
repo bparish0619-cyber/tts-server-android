@@ -26,7 +26,7 @@ class AndroidTtsEngineTest {
     fun play() {
         runBlocking {
             val engine = engine()
-            engine.play("Hello 你好")
+            engine.play("Hello world")
         }
     }
 
@@ -37,7 +37,7 @@ class AndroidTtsEngineTest {
             val player = ExoAudioPlayer(context)
 
             val engine = engine()
-            engine.getFile("Hello 你好").onFailure {
+            engine.getFile("Hello world").onFailure {
                 throw RuntimeException("Engine failed")
             }.onSuccess {
                 println(it.absolutePath)
@@ -53,7 +53,7 @@ class AndroidTtsEngineTest {
             val player = ExoAudioPlayer(context)
             val engine = engine()
             withTimeout(2000) {
-                engine.getStream(text = "Hello 你好").onSuccess {
+                engine.getStream(text = "Hello world").onSuccess {
                     player.play(it.readBytes())
                 }
             }
@@ -68,7 +68,7 @@ class AndroidTtsEngineTest {
             val engine = engine()
 
             track.play()
-            engine.getAudio(text = "Hello 你好", listener = object : AndroidTtsEngine.Listener {
+            engine.getAudio(text = "Hello world", listener = object : AndroidTtsEngine.Listener {
                 override fun start() {
                     println("Start")
                 }

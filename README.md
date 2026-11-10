@@ -1,13 +1,24 @@
 ![MIT](https://img.shields.io/badge/license-MIT-green)
-[![Crowdin](https://img.shields.io/badge/Localization-Crowdin-blueviolet?logo=Crowdin)](https://crowdin.com/project/tts-server)
+[![Build Release](https://github.com/bparish0619-cyber/tts-server-android/actions/workflows/release.yml/badge.svg)](https://github.com/bparish0619-cyber/tts-server-android/actions/workflows/release.yml)
+[![Build Debug](https://github.com/bparish0619-cyber/tts-server-android/actions/workflows/debug.yml/badge.svg)](https://github.com/bparish0619-cyber/tts-server-android/actions/workflows/debug.yml)
 
-[![CI](https://github.com/jing332/tts-server-android/actions/workflows/release.yml/badge.svg)](https://github.com/jing332/tts-server-android/actions/workflows/release.yml)
-[![CI](https://github.com/jing332/tts-server-android/actions/workflows/test.yml/badge.svg)](https://github.com/jing332/tts-server-android/actions/workflows/test.yml)
+# TTS Server (English fork)
 
-![GitHub release](https://img.shields.io/github/downloads/jing332/tts-server-android/total)
-![GitHub release (latest by date)](https://img.shields.io/github/downloads/jing332/tts-server-android/latest/total)
+This repository is Brandon's English-only fork of [jing332's TTS Server](https://github.com/jing332/tts-server-android), updated for Android 16 (API 36). The app is the upstream project; this fork changes the language resources and the build setup, as described below.
 
-# TTS Server [![](https://img.shields.io/badge/Q%E7%BE%A4-124841768-blue)](https://jq.qq.com/?_wv=1027&k=y7WCDjEA)
+## Features
+
+- Registers as an Android system text-to-speech engine, so apps that use the system TTS voice can speak through it
+- Built-in Microsoft demo interface, for trying voices without your own service
+- Custom HTTP TTS requests: send speech requests to an API with your own URL, headers, and request body
+- Importable local TTS engines and JavaScript plugins
+- Narration and dialogue detection for reading mixed text aloud
+- Auto retry with backup configurations, so a failed request can fall back to another setup
+- Text replacement rules, for adjusting wording and pronunciation before speech
+
+## Language
+
+English is the only language in this fork. The interface text, the help documentation, the built-in plugins, and the built-in web control page are all in English, and the other language resources from upstream were removed.
 
 <details>
   <summary>View screenshots</summary>
@@ -19,20 +30,10 @@
 
 </details>
 
-# Download
+## Download
 
-* [Stable release (Releases)](https://github.com/jing332/tts-server-android/releases)
-
-* [Dev build (Actions, requires logging in to a GitHub account)](https://github.com/jing332/tts-server-android/actions)
-
-## Actions mirror
-
-app: https://jing332.lanzn.com/b09jpjd2d
-
-dev: https://jing332.lanzn.com/b09ig9qla
-
-Password: 1234
-
+* [Releases of this fork](https://github.com/bparish0619-cyber/tts-server-android/releases)
+* Debug builds: run the "Build Debug" workflow from the Actions tab and download the `TTS-Server_debug` artifact (requires a GitHub account). Debug builds carry the standard Android debug signature: fine for sideloading and testing, but they cannot update an install that was signed with a private key.
 
 # Grateful
 
@@ -54,7 +55,7 @@ Password: 1234
 | [getactivity/logcat](https://github.com/getactivity/logcat)                                                     | An Android logging framework; view Logcat logs right on your phone                                                                                                                          |
 | [rosuH/AndroidFilePicker](https://github.com/rosuH/AndroidFilePicker)                                           | FilePicker is a small and fast file selector library that is constantly evolving with the goal of rapid integration, high customization, and configurability~ |
 | [androidbroadcast/ViewBindingPropertyDelegate](https://github.com/androidbroadcast/ViewBindingPropertyDelegate) | Make work with Android View Binding simpler                                                                                                                   |
-| [zhanghai/AndroidFastScroll](https://github.com/zhanghai/AndroidFastScroll)                                     | Fast scroll for Android RecyclerView and more                                                                                                                 |
+| [zhanghai/AndroidFastScroll](https://github.com/zhanghai/AndroidFastScroll)                                             | Fast scroll for Android RecyclerView and more                                                                                                                 |
 | [Rosemoe/sora-editor](https://github.com/Rosemoe/sora-editor)                                                   | sora-editor is a cool and optimized code editor on Android platform                                                                                           |
 | [gedoor/rhino-android](https://github.com/gedoor/rhino-android)                                                 | Give access to RhinoScriptEngine from the JSR223 interfaces on Android JRE.                                                                                   |
 | [liangjingkanji/BRV](https://github.com/liangjingkanji/BRV)                                                     | The best RecyclerView framework on Android, simpler and more powerful than BRVAH                                                                                                                      |
@@ -73,9 +74,15 @@ Other resources:
 
 * [Alibaba IconFont](https://www.iconfont.cn/)
 
-* [酷安@沉默_9520](http://www.coolapk.com/u/25956307) author of this app's icon
+* [Coolapk user](http://www.coolapk.com/u/25956307), author of this app's icon
 
 # Build
+
+### GitHub Actions:
+
+The "Build Debug" workflow (`.github/workflows/debug.yml`) builds a debug APK on demand: open the Actions tab, choose "Build Debug", run it on the `compose` branch, and download the `TTS-Server_debug` artifact. The "Build Release" workflow (`.github/workflows/release.yml`) runs when `CHANGELOG.md` changes on the `compose` branch and publishes a GitHub Release with the release APK attached.
+
+This fork has no signing secrets configured. Without them, debug builds use the standard Android debug key. Signed release builds need the four repository secrets listed below.
 
 ### Android Studio:
 Create a new file named `local.properties` in the project root directory and write the following into it:
@@ -88,8 +95,7 @@ ALIAS_PASSWORD= alias password
 
 
 
-### Github Actions:
-> See https://www.cnblogs.com/jing332/p/17452492.html for details
+### Github Actions signing secrets:
 
 Use Git Bash to Base64-encode the signing file without line breaks: `openssl base64 < key.jks | tr -d '\r\n' | tee key.jks.base64.txt`
 

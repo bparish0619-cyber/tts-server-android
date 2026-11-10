@@ -97,7 +97,10 @@ class SystemTtsService : TextToSpeechService(), IEventDispatcher {
         const val ACTION_NOTIFY_KILL_PROCESS = "tts.notification.exit"
         const val NOTIFICATION_CHAN_ID = "system_tts_service"
 
-        const val DEFAULT_VOICE_NAME = "DEFAULT_默认"
+        // English-only name for the built-in default voice. It previously
+        // included Chinese characters; anyone who selected the old voice name
+        // in system TTS settings may need to reselect this voice.
+        const val DEFAULT_VOICE_NAME = "DEFAULT"
         const val PARAM_BGM_ENABLED = "bgm_enabled"
 
         /**

@@ -9,7 +9,7 @@ object HanlpManager {
 
     fun test(): Boolean {
         kotlin.runCatching {
-            HanLP.newSegment().seg("test, 测试")
+            HanLP.newSegment().seg("test, segmentation")
             return true
         }
 

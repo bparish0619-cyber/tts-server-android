@@ -13,12 +13,13 @@ class SpeechRuleEngineContext(
     /**
      * Create a tokenizer. This is a factory method.
      * Params:
-     * algorithm – the tokenization algorithm; either its Chinese or English name can be passed. Options:
-     * 维特比 (viterbi): the best balance of efficiency and quality
-     * 双数组trie树 (dat): extremely fast dictionary-based tokenization, tens of millions of characters per second
-     * 条件随机场 (crf): high accuracy for tokenization, part-of-speech tagging, and named entity recognition; suited to demanding NLP tasks
-     * 感知机 (perceptron): tokenization, part-of-speech tagging, and named entity recognition, with support for online learning
-     * N最短路 (nshort): slightly better named entity recognition, at the cost of speed
+     * algorithm - the tokenization algorithm; pass its English name. This fork
+     * documents the English identifiers only, so scripts should use these values:
+     * viterbi: the best balance of efficiency and quality
+     * dat: extremely fast dictionary-based tokenization, tens of millions of characters per second
+     * crf: high accuracy for tokenization, part-of-speech tagging, and named entity recognition; suited to demanding NLP tasks
+     * perceptron: tokenization, part-of-speech tagging, and named entity recognition, with support for online learning
+     * nshort: slightly better named entity recognition, at the cost of speed
      * Returns:
      * A tokenizer
      */

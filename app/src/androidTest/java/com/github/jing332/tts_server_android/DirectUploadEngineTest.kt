@@ -43,9 +43,9 @@ class DirectUploadEngineTest {
     fun testJS() {
         val code = """
             let DirectUploadJS = {
-                "XX网盘(永久有效)": function(config){
+                "XX Cloud Drive (permanent)": function(config){
                     println("from js: " + config)
-                    return {'url':'https://xxx.com/111.json', 'summary':'永久有效'}                                                                                        
+                    return {'url':'https://xxx.com/111.json', 'summary':'permanent'}                                                                                        
                 },
             }
         """.trimIndent()

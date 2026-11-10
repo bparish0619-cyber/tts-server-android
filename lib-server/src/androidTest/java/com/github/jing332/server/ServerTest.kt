@@ -39,7 +39,7 @@ class ServerTest {
             }
 
             override suspend fun voices(engine: String): List<Voice> {
-                return listOf(Voice("Xiao Yi", "zh-CN", "中文"))
+                return listOf(Voice("Xiao Yi", "zh-CN", "Chinese"))
             }
 
             override suspend fun engines(): List<Engine> {

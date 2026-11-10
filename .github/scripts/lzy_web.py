@@ -36,7 +36,10 @@ def login_by_cookie():
         log('ERROR: Please specify the value of ylogin in the Cookie!')
         return False
     res = requests.get(url_account, headers=headers, cookies=cookie, verify=True)
-    if '网盘用户登录' in res.text:
+    # Identify the signed-out page by its login form endpoint (the same
+    # account.php?action=login URL used as the Referer above) instead of the
+    # page's former Chinese title text.
+    if 'account.php?action=login' in res.text:
         log('ERROR: Login failed, please update the Cookie')
         return False
     else:

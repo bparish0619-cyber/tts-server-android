@@ -20,7 +20,7 @@ class TtsManagerImplTest {
     }
 
     private val text = """
-        JAVA简易日志门面，是一套包装Logging 框架的界面程式，以外观模式实现。可以在软件部署的时候决定要使用的 Logging 框架，目前主要支援的有Java Logging API、log4j及logback等框架。
+        The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks, implemented with the facade pattern. It lets you decide at deployment time which logging framework to use; the main supported frameworks are the Java Logging API, log4j, and logback.
     """.trimIndent()
 
     @Test
