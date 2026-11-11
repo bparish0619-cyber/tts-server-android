@@ -11,7 +11,15 @@ class CheckVoiceData : Activity() {
         val result = TextToSpeech.Engine.CHECK_VOICE_DATA_PASS
         val returnData = Intent()
 
-        val available: ArrayList<String> = arrayListOf("zho-CHN")
+        // Voice data this engine reports to Android, which is what the
+        // system TTS settings language picker lists (besides "use system
+        // language"). Format: ISO 639-3 language + "-" + ISO 3166 country.
+        // English (US) comes first because it is this fork's default
+        // language; Chinese remains available. Upstream reported only
+        // "zho-CHN", which is why the picker offered no English entry.
+        // CHANGE-ME: to offer another language, add its "lll-CCC" entry
+        // here and keep SystemTtsService.onIsLanguageAvailable in sync.
+        val available: ArrayList<String> = arrayListOf("eng-USA", "zho-CHN")
         val unavailable: ArrayList<String> = arrayListOf()
 
         returnData.putStringArrayListExtra(TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES, available)
