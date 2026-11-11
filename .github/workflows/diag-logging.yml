@@ -36,7 +36,7 @@ jobs:
       - name: Dependency graph (logging artifacts)
         run: |
           chmod +x gradlew
-          ./gradlew :app:dependencies --configuration debugRuntimeClasspath > deps-full.txt 2>&1 || true
+          ./gradlew :app:dependencies --configuration appDebugRuntimeClasspath > deps-full.txt 2>&1 || true
           echo "===== RESOLVED LOGGING ARTIFACTS ====="
           grep -n -iE "slf4j|logback|oshai|kotlin-logging" deps-full.txt | head -80
           echo "===== END ====="
