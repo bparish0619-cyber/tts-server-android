@@ -9,7 +9,15 @@
 #   new behavior changes (foreground service types, permissions).
 # ============================================================
 compileSdk = "36"
-minSdk = "21"
+# minSdk floor is 24 (Android 7.0), raised from 21 for the logging stack:
+# kotlin-logging 7 logs through slf4j 2.0's fluent API (Logger.atLevel),
+# which is implemented as Java 8 interface DEFAULT methods. Android runs
+# those natively only from API 24; below 24 the dexer strips the default
+# bodies into a synthetic companion class that call sites inside library
+# jars never dispatch through, so payload log calls (for example
+# BgmPlayer.setPlayList) crash with AbstractMethodError at Logger.atLevel.
+# Do NOT lower this below 24 while kotlin-logging 7 / slf4j 2.0 are used.
+minSdk = "24"
 targetSdk = "36"
 
 coreKtx = "1.15.0"
