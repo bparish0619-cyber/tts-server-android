@@ -182,6 +182,20 @@
             </intent-filter>
         </activity>
 
+        <!-- The system TTS settings Play button asks the engine for its
+             sample text through this intent before it will send any
+             synthesis request; without a handler Play stays silent. -->
+        <activity
+            android:name=".service.systts.GetSampleText"
+            android:exported="true"
+            android:label="GetSampleText">
+            <intent-filter>
+                <action android:name="android.speech.tts.engine.GET_SAMPLE_TEXT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".compose.DebugSystemTtsActivity"
             android:exported="true"
