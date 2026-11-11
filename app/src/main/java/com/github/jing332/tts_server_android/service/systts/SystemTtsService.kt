@@ -323,6 +323,15 @@ class SystemTtsService : TextToSpeechService(), IEventDispatcher {
         request: SynthesisRequest,
         callback: android.speech.tts.SynthesisCallback,
     ) {
+        // Entry trace for every synthesis request Android sends us. The
+        // system settings Play button reaches this method only after it
+        // has sample text (see GetSampleText), so if Play is pressed and
+        // this line is absent from the log, the request never arrived.
+        // The text itself is never logged, only its length.
+        logger.debug {
+            "synthesize request: voice=${request.voiceName} " +
+                "len=${request.charSequenceText.length}"
+        }
         val text = request.charSequenceText.toString().trim()
         if (text.isBlank()) {
             logger.debug { "Skip empty text request" }
@@ -387,6 +396,17 @@ class SystemTtsService : TextToSpeechService(), IEventDispatcher {
                             logE(R.string.tts_config_not_exist)
                             longToast(R.string.tts_config_not_exist)
                             callback.error(TextToSpeech.ERROR_INVALID_REQUEST)
+                        }
+
+                        else -> {
+                            // Every current SynthesisError subtype is
+                            // handled above. If a new subtype is ever
+                            // added, it must not fail silently: log it
+                            // here and still complete the Android
+                            // callback with an error so the caller is
+                            // not left waiting forever.
+                            logger.error { "unhandled synthesis error: $it" }
+                            callback.error(TextToSpeech.ERROR_SYNTHESIS)
                         }
                     }
 //                    callback.done()
