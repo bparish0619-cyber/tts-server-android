@@ -1,0 +1,73 @@
+name: Diagnose Logging
+
+# Temporary diagnostic workflow (added 2026-11-10): prints the resolved
+# logging dependencies and inspects the built APK's slf4j/logback classes
+# to pin down an AbstractMethodError at org.slf4j.Logger.atLevel.
+# Remove once the logging fix is verified.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Init Signature
+        run: |
+          touch local.properties
+          echo ALIAS_NAME='${{ secrets.ALIAS_NAME }}' >> local.properties
+          echo ALIAS_PASSWORD='${{ secrets.ALIAS_PASSWORD }}' >> local.properties
+          echo KEY_PASSWORD='${{ secrets.KEY_PASSWORD }}' >> local.properties
+          echo KEY_PATH='./key.jks' >> local.properties
+          # Read the newline-free Base64 value from Secrets, decode it, and save it to app/key.jks
+          echo ${{ secrets.KEY_STORE }} | base64 --decode > $GITHUB_WORKSPACE/app/key.jks
+
+      - name: Dependency graph (logging artifacts)
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:dependencies --configuration debugRuntimeClasspath > deps-full.txt 2>&1 || true
+          echo "===== RESOLVED LOGGING ARTIFACTS ====="
+          grep -n -iE "slf4j|logback|oshai|kotlin-logging" deps-full.txt | head -80
+          echo "===== END ====="
+
+      - name: Build debug APK
+        run: |
+          ./gradlew assembleAppDebug --build-cache --parallel --daemon
+
+      - name: Inspect APK dex (slf4j Logger and logback Logger)
+        run: |
+          APK=$(ls app/build/outputs/apk/app/debug/*debug.apk | head -1)
+          echo "APK: $APK"
+          APKA=""
+          for c in "$ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer" "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/apkanalyzer" "/usr/local/lib/android/sdk/cmdline-tools/latest/bin/apkanalyzer"; do
+            if [ -n "$c" ] && [ -x "$c" ]; then APKA="$c"; break; fi
+          done
+          if [ -z "$APKA" ]; then APKA=$(find / -name apkanalyzer -type f 2>/dev/null | head -1); fi
+          echo "apkanalyzer: $APKA"
+          "$APKA" dex code --class org.slf4j.Logger "$APK" > slf4j-logger.smali || true
+          "$APKA" dex code --class ch.qos.logback.classic.Logger "$APK" > logback-logger.smali || true
+          echo "===== org.slf4j.Logger fluent methods ====="
+          grep -n "atLevel\|makeLoggingEventBuilder\|atDebug\|isEnabledForLevel" slf4j-logger.smali | head -30
+          echo "===== ch.qos.logback.classic.Logger fluent methods ====="
+          grep -n "atLevel\|makeLoggingEventBuilder" logback-logger.smali | head -30
+          echo "===== END ====="
+
+      - name: Upload diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: "logging-diag"
+          path: |
+            deps-full.txt
+            slf4j-logger.smali
+            logback-logger.smali
