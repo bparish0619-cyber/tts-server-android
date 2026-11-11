@@ -114,7 +114,12 @@ class SystemTtsService : TextToSpeechService(), IEventDispatcher {
         }
     }
 
-    private val mCurrentLanguage: MutableList<String> = mutableListOf("zho", "CHN", "")
+    // The engine's current language before Android loads one explicitly:
+    // [ISO 639-3 language, ISO 3166 country, variant]. This fork defaults
+    // to English (US); upstream defaulted to Chinese ("zho", "CHN").
+    // onLoadLanguage() overwrites this with the language the system
+    // actually selects, and CheckVoiceData advertises the same pair.
+    private val mCurrentLanguage: MutableList<String> = mutableListOf("eng", "USA", "")
 
 
     private val mTextProcessor = TextProcessor()
