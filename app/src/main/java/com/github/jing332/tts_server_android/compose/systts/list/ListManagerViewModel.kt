@@ -4,11 +4,14 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.jing332.common.utils.FileUtils.readAllText
 import com.github.jing332.database.dbm
 import com.github.jing332.database.entities.AbstractListGroup.Companion.DEFAULT_GROUP_ID
+import com.github.jing332.database.entities.plugin.Plugin
 import com.github.jing332.database.entities.systts.GroupWithSystemTts
 import com.github.jing332.database.entities.systts.SystemTtsV2
 import com.github.jing332.database.entities.systts.TtsConfigurationDTO
+import com.github.jing332.database.entities.systts.source.PluginTtsSource
 import com.github.jing332.tts_server_android.R
 import com.github.jing332.tts_server_android.conf.SystemTtsConfig
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +25,12 @@ import java.util.Collections
 class ListManagerViewModel : ViewModel() {
     companion object {
         const val TAG = "ListManagerViewModel"
+
+        // Plugin id of the bundled ElevenLabs plugin, as declared in the
+        // "id" field of its PluginJS block in
+        // assets/defaultData/plugin-elevenlabs.js. The seeded plugin and
+        // the seeded configuration below are tied together by this id.
+        const val ELEVENLABS_PLUGIN_ID = "io.elevenlabs.api"
     }
 
     private val _list =
@@ -154,14 +163,80 @@ class ListManagerViewModel : ViewModel() {
     }
 
     private fun importDefaultListData(context: Context) {
-//        val json = context.assets.open("defaultData/list.json").readAllText()
-//        val list =
-//            AppConst.jsonBuilder.decodeFromString<List<GroupWithSystemTts>>(
-//                json
-//            )
-//        viewModelScope.launch(Dispatchers.IO) {
-//            dbm.systemTtsV2.insertGroupWithTts(*list.toTypedArray())
-//        }
+        // First-run defaults for this fork. This replaces upstream's old
+        // list.json preset import (which seeded Chinese demo voices): a
+        // fresh install now gets the bundled ElevenLabs plugin plus one
+        // ready-to-use ElevenLabs configuration, so the only setup left
+        // is entering your own ElevenLabs API key in the plugin variables.
+        //
+        // checkListData() calls this only when the configuration list is
+        // completely empty: fresh install, or after every configuration
+        // was deleted. Installs that already have configurations are
+        // never touched, and no existing data is migrated or removed.
+        viewModelScope.launch(Dispatchers.IO) {
+            seedElevenLabsPlugin(context)
+            seedElevenLabsConfig()
+        }
+    }
+
+    // CHANGE-ME (bundled plugin): the plugin code is the asset
+    // defaultData/plugin-elevenlabs.js, taken unchanged from the upstream
+    // project's plugin collection. To bundle a different plugin instead,
+    // drop its .js file into assets/defaultData and adjust the asset name,
+    // ELEVENLABS_PLUGIN_ID, and the metadata below to match its PluginJS
+    // block.
+    private fun seedElevenLabsPlugin(context: Context) {
+        if (dbm.pluginDao.getByPluginId(ELEVENLABS_PLUGIN_ID) != null) return
+
+        val code =
+            context.assets.open("defaultData/plugin-elevenlabs.js").readAllText()
+        dbm.pluginDao.insert(
+            Plugin(
+                // Must stay enabled: the speech engine only resolves
+                // plugins that are enabled (SpeechServiceFactory).
+                isEnabled = true,
+                version = 1,
+                name = "ElevenLabs",
+                pluginId = ELEVENLABS_PLUGIN_ID,
+                author = "Generated AI",
+                code = code,
+                // Declared variables, mirrored from the "vars" block in
+                // the plugin code. apiKey is present but EMPTY on
+                // purpose: the user enters their own key under the
+                // plugin's Variables. Never hardcode a real API key here.
+                defVars = mapOf("apiKey" to mapOf("label" to "ElevenLabs API Key")),
+                userVars = mapOf("apiKey" to ""),
+            )
+        )
+    }
+
+    private fun seedElevenLabsConfig() {
+        // Re-check inside the coroutine so a second call can never
+        // duplicate the seeded configuration.
+        if (dbm.systemTtsV2.count != 0) return
+
+        dbm.systemTtsV2.insert(
+            SystemTtsV2(
+                displayName = "ElevenLabs",
+                groupId = DEFAULT_GROUP_ID,
+                isEnabled = true,
+                order = 0,
+                config = TtsConfigurationDTO(
+                    source = PluginTtsSource(
+                        // CHANGE-ME (seeded voice): default locale and
+                        // voice for the seeded configuration. The voice
+                        // is Zoe (id XdflFrQO8wbGpWMNZHFr); swap in any
+                        // voice id from your ElevenLabs account to change
+                        // it. The plugin itself ignores the locale when
+                        // synthesizing; en-US also makes Android expose
+                        // this configuration as a US English voice.
+                        locale = "en-US",
+                        voice = "XdflFrQO8wbGpWMNZHFr", // Zoe
+                        pluginId = ELEVENLABS_PLUGIN_ID,
+                    )
+                ),
+            )
+        )
     }
 
 }
