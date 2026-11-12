@@ -10,6 +10,10 @@ on:
 
 jobs:
   build:
+    # Fork fix 2026-11-12: creating the GitHub Release at the end of
+    # this job needs Contents write access, granted here explicitly.
+    permissions:
+      contents: write
     strategy:
       matrix:
         product: [ { name: "Original App", value: app } ]
@@ -76,4 +80,7 @@ jobs:
           prerelease: false
           files: ${{env.outputs_dir}}/apk/${{ env.product }}/release/*.apk
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}    
+          # Fork fix 2026-11-12: the old value named a repo secret that does
+          # not exist here, so the release step ran with an empty token and
+          # GitHub answered 403. The built-in workflow token is the right one.
+          GITHUB_TOKEN: ${{ github.token }}
